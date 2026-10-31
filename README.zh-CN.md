@@ -14,7 +14,7 @@
 
 ```bash
 export RELAY_KEY=sk-...    # 只从环境变量读取，不接受命令行明文
-npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --lang zh --card card.svg
+npx github:YanYunCY/relaycheck https://relay.example.com --model claude-sonnet-4-5 --lang zh --card card.svg
 ```
 
 ```
@@ -73,7 +73,7 @@ LANG_OPT=zh bash scripts/demo.sh    # 老实的假中转 vs 偷换模型的假�
 ## 自己生成参考指纹
 
 ```bash
-RELAY_KEY=$ANTHROPIC_API_KEY npx relaycheck fingerprint https://api.anthropic.com --model claude-sonnet-4-5 --out refs/claude-sonnet-4-5.json
+RELAY_KEY=$ANTHROPIC_API_KEY npx github:YanYunCY/relaycheck fingerprint https://api.anthropic.com --model claude-sonnet-4-5 --out refs/claude-sonnet-4-5.json
 ```
 
 请用可信端点生成参考指纹，`--api` 和 `--reasoning-effort` 要与之后检测时一致。参考文件会记录探针集版本、采样设置、过离散估计，以及每种协议的精确计费基准。0.1 版（探针集 v1）的参考文件仍可读取，但会提示你重新生成。

@@ -24,7 +24,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "demo": "bash scripts/demo.sh",
-    "refs": "npm run build && node scripts/gen-refs.mjs"
+    "refs": "npm run build && node scripts/gen-refs.mjs",
+    "prepare": "tsup"
   },
   "keywords": [
     "llm",
