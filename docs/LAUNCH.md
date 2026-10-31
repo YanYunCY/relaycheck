@@ -32,7 +32,7 @@
 |---|---|---|
 | 09:00 | V2EX「分享创造」+「程序员」 | 痛点叙事：降智/掺水怎么证明；附报告卡；强调不点名、key 不出本机 |
 | 10:00 | 即刻、微信群、Telegram 中文 AI 群 | 截图 + 一句话 |
-| 21:30（美东 09:30） | Hacker News「Show HN」 | 标题：Show HN: Relaycheck – statistically test whether an LLM API relay serves the model it claims；正文讲 DFA/KBF 论文方法落地 + 影子 API 研究 45.8% 数据 |
+| 22:30（美东 09:30，11 月起美东冬令时差 13 小时） | Hacker News「Show HN」 | 标题：Show HN: Relaycheck – statistically test whether an LLM API relay serves the model it claims；正文讲 DFA/KBF 论文方法落地 + 影子 API 研究 45.8% 数据 |
 | 22:00 | X（中英各一条线程） | 动图 + 报告卡；@ 论文作者、相关开发者 |
 | 次日 | r/LocalLLaMA、r/ClaudeAI | 角度：OpenRouter/第三方提供商偷偷量化或换模型怎么查 |
 
