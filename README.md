@@ -14,7 +14,7 @@ Statistically test whether an LLM API relay, proxy or gateway serves the model i
 
 ```bash
 export RELAY_KEY=sk-...    # read only from an env var, never from argv
-npx github:YanYunCY/relaycheck https://relay.example.com --model claude-sonnet-4-5 --card card.svg
+npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --card card.svg
 ```
 
 ```
@@ -73,7 +73,7 @@ What it cannot see: a relay that serves the genuine model most of the time. At 2
 ## Build your own reference
 
 ```bash
-RELAY_KEY=$ANTHROPIC_API_KEY npx github:YanYunCY/relaycheck fingerprint https://api.anthropic.com --model claude-sonnet-4-5 --out refs/claude-sonnet-4-5.json
+RELAY_KEY=$ANTHROPIC_API_KEY npx relaycheck fingerprint https://api.anthropic.com --model claude-sonnet-4-5 --out refs/claude-sonnet-4-5.json
 ```
 
 Use a trusted endpoint, and use the same `--api` and `--reasoning-effort` you will check with. The reference records the probe-set version, sampling settings, an over-dispersion estimate and exact billing baselines for each protocol. References from 0.1 (probe set v1) still load, with a warning to regenerate them.
