@@ -19,10 +19,11 @@
 ## B. 发布计划
 
 ### 发布前（T-7 到 T-1）
-- [ ] 用官方 API 生成 4 个真实参考指纹（等 Ted 批预算）。
+- [x] 真实参考指纹 gpt-6-luna（其他模型靠社区 PR）。
 - [ ] 找 5–10 位 V2EX / 群友内测真实中转，收集误报；目标同模型对照误报率 ≤ 1%。
-- [x] README 双语、动图、报告卡图（FAQ 待补）
-- [ ] FAQ（为什么可信、误报怎么办、为什么不做红黑榜）。
+- [x] README 双语、动图、报告卡图
+- [x] FAQ：docs/FAQ.md / docs/FAQ.zh-CN.md。
+- [ ] 公开后在 Settings → Social preview 上传 docs/social-preview.png（私有仓库没有这个选项）。
 - [ ] 预写好各平台文案；GitHub topics：llm, claude, codex, api-relay, model-fingerprinting, claude-code。
 - [ ] 经 Ted 同意后建仓 YanYunCY/relaycheck，发 npm v0.1.0。
 

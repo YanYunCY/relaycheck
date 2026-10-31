@@ -86,6 +86,8 @@ Your key is read from an environment variable only, sent only to the URL you pas
 
 Statistical verdicts are evidence, not proof. A relay that is genuine most of the time, or that recognises relaycheck's fixed probes, can pass. Fingerprints drift when vendors update models, so regenerate references from a trusted endpoint. Billing is exact only against a reference baseline or `count_tokens`; otherwise it is labelled uncalibrated. Full method and numbers: [docs/METHOD.md](docs/METHOD.md). relaycheck will never publish a name-and-shame list. You decide what to share.
 
+More questions: [FAQ](docs/FAQ.md).
+
 ## Prior art
 
 Methods build on DFA (arXiv 2610.37086), API-TAIL (arXiv 2610.36801) and KBF (arXiv 2605.29524). Related tools: relay-guard, RelayScope, fpverify, claude-detector.
