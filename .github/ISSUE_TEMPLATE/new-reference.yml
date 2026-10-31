@@ -1,0 +1,12 @@
+name: New reference fingerprint
+description: Contribute a fingerprint for another model (PRs to refs/ welcome)
+labels: [reference]
+body:
+  - type: input
+    id: model
+    attributes: {label: Model, placeholder: "claude-sonnet-x"}
+    validations: {required: true}
+  - type: textarea
+    id: how
+    attributes: {label: How it was generated, description: "Official endpoint, --api, --samples, --reasoning-effort, date"}
+    validations: {required: true}

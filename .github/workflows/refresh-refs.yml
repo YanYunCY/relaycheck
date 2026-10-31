@@ -1,0 +1,49 @@
+name: Refresh reference fingerprints
+# Monthly: re-sample the official endpoint, check drift against the committed
+# reference, and open a PR with the fresh fingerprint. Costs a few cents per model.
+# Needs repo secret OPENAI_API_KEY; skipped when it is not set.
+on:
+  schedule:
+    - cron: '0 3 1 * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      RELAY_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip without key
+        id: gate
+        run: |
+          if [ -z "$RELAY_KEY" ]; then echo "OPENAI_API_KEY not set; skipping."; echo "run=false" >> "$GITHUB_OUTPUT"; else echo "run=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - if: steps.gate.outputs.run == 'true'
+        run: npm ci && npm run build
+      - name: Drift check (official endpoint vs committed reference)
+        if: steps.gate.outputs.run == 'true'
+        continue-on-error: true
+        run: |
+          node dist/cli.js https://api.openai.com --model gpt-6-luna --api responses --reasoning-effort none \
+            --probes identity --ref refs/gpt-6-luna.json --json drift.json --quiet --no-color | tee drift.txt
+      - name: Re-fingerprint
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          node dist/cli.js fingerprint https://api.openai.com --model gpt-6-luna --api responses --reasoning-effort none \
+            --samples 100 --out refs/gpt-6-luna.json --quiet
+      - name: Open PR
+        if: steps.gate.outputs.run == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: refresh-refs
+          commit-message: 'refs: monthly refresh of gpt-6-luna fingerprint'
+          title: 'refs: monthly refresh of gpt-6-luna fingerprint'
+          body-path: drift.txt
+          add-paths: refs/gpt-6-luna.json

@@ -1,0 +1,21 @@
+name: False positive / wrong verdict
+description: relaycheck flagged an endpoint you believe is genuine (or missed one)
+labels: [false-positive]
+body:
+  - type: input
+    id: model
+    attributes: {label: Model and --api, placeholder: "gpt-6-luna, --api responses"}
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes: {label: relaycheck version, placeholder: "0.2.0"}
+    validations: {required: true}
+  - type: textarea
+    id: report
+    attributes:
+      label: JSON report
+      description: Attach the file from --json (keys and host are redacted by default). Please do not name relays publicly unless you want to.
+    validations: {required: true}
+  - type: textarea
+    id: why
+    attributes: {label: Why you think the verdict is wrong}
