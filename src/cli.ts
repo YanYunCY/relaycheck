@@ -6,7 +6,7 @@ import { findRef, generateFingerprint, loadRef, measureBillingBaseline, saveRef,
 import { IDENTITY_PROBES, refCompatibility } from './probes/identity.js';
 import { MOCK_KINDS, type MockKind, startMock } from './mock/server.js';
 import { Redactor, hostOf } from './redact.js';
-import { renderCard } from './report/card.js';
+import { cardStyleOf, renderCard } from './report/card.js';
 import { renderHtml } from './report/html.js';
 import { renderJson } from './report/json.js';
 import { renderTerminal, useColor } from './report/terminal.js';
@@ -281,7 +281,7 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
     const wrote: string[] = [];
     if (str(flags.json)) wrote.push(writeOut(str(flags.json)!, renderJson(report, redactor), io));
     if (str(flags.html)) wrote.push(writeOut(str(flags.html)!, redactor.redact(renderHtml(redactor.redactDeep(report), lang, showHost)), io));
-    if (str(flags.card)) wrote.push(writeOut(str(flags.card)!, redactor.redact(renderCard(redactor.redactDeep(report), showHost)), io));
+    if (str(flags.card)) wrote.push(writeOut(str(flags.card)!, redactor.redact(renderCard(redactor.redactDeep(report), { showHost, lang, style: cardStyleOf(io.env.RELAYCHECK_CARD_STYLE) })), io));
     for (const w of wrote) log(`wrote ${w}`);
     return report.exitCode;
   } catch (e) {

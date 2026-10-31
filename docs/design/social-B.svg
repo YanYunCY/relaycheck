@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" font-family="Inter, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei', Roboto, 'Helvetica Neue', Arial, sans-serif">
+  <title>relaycheck: Is your relay serving the real model? 你的中转站是真模型吗？</title>
+  <rect width="1280" height="640" fill="#ffffff"/>
+
+  <!-- wordmark + tagline, Swiss left column -->
+  <rect x="96" y="128" width="64" height="8" fill="#d92d20"/>
+  <text x="90" y="290" font-size="128" font-weight="800" fill="#111418" letter-spacing="-4" font-family="'Inter Display', Inter, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei', Roboto, 'Helvetica Neue', Arial, sans-serif">relaycheck</text>
+  <text x="96" y="366" font-size="40" font-weight="600" fill="#111418">Is your relay serving the real model?</text>
+  <text x="96" y="420" font-size="32" fill="#5b616e">你的中转站是真模型吗？</text>
+  <g transform="translate(96 476)">
+    <rect width="380" height="56" rx="8" fill="#111418"/>
+    <text x="22" y="36" font-size="23" fill="#ffffff" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace"><tspan fill="#8a909b">$</tspan> npx relaycheck &lt;url&gt;</text>
+  </g>
+  <text x="500" y="513" font-size="20" fill="#8a909b">open source · MIT · zero deps</text>
+
+  <!-- motif: a red 验货 seal, stamped at an angle -->
+  <g transform="translate(1022 316) rotate(-7)">
+    <rect x="-148" y="-148" width="296" height="296" rx="30" fill="#d92d20"/>
+    <rect x="-128" y="-128" width="256" height="256" rx="16" fill="none" stroke="#ffffff" stroke-width="5"/>
+    <text x="0" y="-12" font-size="118" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="'Songti SC', STSong, SimSun, 'Noto Serif CJK SC', 'Source Han Serif SC', serif">验</text>
+    <text x="0" y="104" font-size="118" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="'Songti SC', STSong, SimSun, 'Noto Serif CJK SC', 'Source Han Serif SC', serif">货</text>
+  </g>
+</svg>
