@@ -1,0 +1,2 @@
+{"mode":"null","pv":"conservative","ref":"refs/gpt-6-luna.json","alt":"","truth":"ref","w":0,"refN":100,"testN":24,"sims":2500,"seed":1,"below_fail":0,"below_warn":10,"below_05":49,"secs":7.607}
+{"mode":"null","pv":"conservative","ref":"refs/gpt-6-luna.json","alt":"","truth":"ref","w":0,"refN":100,"testN":24,"sims":2500,"seed":2,"below_fail":1,"below_warn":14,"below_05":54,"secs":7.876}

@@ -1,0 +1,2 @@
+{"mode":"null","phi":1.1,"correct":"true","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"ref","w":0,"refN":100,"testN":24,"sims":2000,"seed":1,"below_fail":0,"below_warn":17,"below_05":62,"secs":6.307,"medianP":0.9406736510954803,"below_half":134}
+{"mode":"null","phi":1.1,"correct":"true","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"ref","w":0,"refN":100,"testN":24,"sims":2000,"seed":2,"below_fail":1,"below_warn":11,"below_05":52,"secs":7.099,"medianP":0.9382557465743813,"below_half":146}

@@ -1,0 +1,6 @@
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":51,"below_fail":0,"below_warn":6,"below_05":33,"secs":3.722}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":52,"below_fail":1,"below_warn":13,"below_05":53,"secs":3.154}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":53,"below_fail":0,"below_warn":8,"below_05":31,"secs":2.851}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":54,"below_fail":0,"below_warn":3,"below_05":24,"secs":2.918}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":55,"below_fail":0,"below_warn":5,"below_05":35,"secs":3.488}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":56,"below_fail":0,"below_warn":10,"below_05":41,"secs":3.606}

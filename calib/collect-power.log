@@ -1,0 +1,15 @@
+(node:14041) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14058) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+gpt-5.6-luna: 5760 requests, 0 errors → calib/raw/power-gpt-5.6-luna.jsonl; total spend so far $0.1941
+(node:14366) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14379) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+gpt-5-nano: 2880 requests, 0 errors → calib/raw/power-gpt-5-nano.jsonl; total spend so far $0.2208
+(node:14771) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14784) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+gpt-5.4-nano: 2880 requests, 0 errors → calib/raw/power-gpt-5.4-nano.jsonl; total spend so far $0.2582

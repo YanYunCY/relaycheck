@@ -1,0 +1,30 @@
+(node:8917) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  · sampling 100 × 24 probes (≈2400 short requests)
+  · fingerprint 1/24
+  · fingerprint 2/24
+  · fingerprint 3/24
+  · fingerprint 4/24
+  · fingerprint 5/24
+  · fingerprint 6/24
+  · fingerprint 7/24
+  · fingerprint 8/24
+  · fingerprint 9/24
+  · fingerprint 10/24
+  · fingerprint 11/24
+  · fingerprint 12/24
+  · fingerprint 13/24
+  · fingerprint 14/24
+  · fingerprint 15/24
+  · fingerprint 16/24
+  · fingerprint 17/24
+  · fingerprint 18/24
+  · fingerprint 19/24
+  · fingerprint 20/24
+  · fingerprint 21/24
+  · fingerprint 22/24
+  · fingerprint 23/24
+  · fingerprint 24/24
+  · billing baseline (responses): b1=80 b4=257 b12=729 tokenizer=74
+  · billing baseline (openai): b1=80 b4=257 b12=729 tokenizer=74
+wrote reference fingerprint /workspace/projects/6f683446-3a9a-4866-b478-51e28e3dbb80/relaycheck/calib/refs/gpt-6-luna.v2.json (probe set v2: 24 probes × 100; billing baselines: responses, openai; used 2416 requests, 80160 input / 13181 output tokens)

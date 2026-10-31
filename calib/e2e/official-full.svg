@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="-apple-system, 'Segoe UI', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif">
+  <rect width="1200" height="630" fill="#030712"/>
+  <rect x="0" y="0" width="12" height="630" fill="#22c55e"/>
+  <text x="64" y="76" font-size="28" fill="#9ca3af" font-weight="600">relaycheck 验货报告 · Relay Check Report</text>
+  <text x="64" y="160" font-size="76" fill="#22c55e" font-weight="800">一致 CONSISTENT</text>
+  <text x="64" y="212" font-size="26" fill="#f9fafb">gpt-6-luna  ·  responses  ·  •••/v1  (主机已隐藏 host hidden)</text>
+  <text x="64" y="256" font-size="24" fill="#d1d5db">p = 0.722</text>
+  <text x="64" y="292" font-size="19" fill="#9ca3af">一致：行为与 gpt-6-luna 参考指纹一致（p=0.722），协议/计费/上下文未见异常</text>
+<g transform="translate(64 318)">
+  <rect width="1072" height="50" rx="10" fill="#111827"/>
+  <circle cx="26" cy="25" r="9" fill="#22c55e"/>
+  <text x="50" y="32" font-size="22" fill="#f9fafb" font-weight="600">身份 Identity</text>
+  <text x="330" y="32" font-size="20" fill="#d1d5db">身份一致 · identity consistent</text>
+  <text x="1052" y="32" font-size="20" fill="#22c55e" font-weight="700" text-anchor="end">通过 PASS</text>
+</g>
+<g transform="translate(64 380)">
+  <rect width="1072" height="50" rx="10" fill="#111827"/>
+  <circle cx="26" cy="25" r="9" fill="#22c55e"/>
+  <text x="50" y="32" font-size="22" fill="#f9fafb" font-weight="600">协议 Protocol</text>
+  <text x="330" y="32" font-size="20" fill="#d1d5db">协议保真 · protocol intact</text>
+  <text x="1052" y="32" font-size="20" fill="#22c55e" font-weight="700" text-anchor="end">通过 PASS</text>
+</g>
+<g transform="translate(64 442)">
+  <rect width="1072" height="50" rx="10" fill="#111827"/>
+  <circle cx="26" cy="25" r="9" fill="#22c55e"/>
+  <text x="50" y="32" font-size="22" fill="#f9fafb" font-weight="600">计费 Billing</text>
+  <text x="330" y="32" font-size="20" fill="#d1d5db">计费正常 · billing looks honest</text>
+  <text x="1052" y="32" font-size="20" fill="#22c55e" font-weight="700" text-anchor="end">通过 PASS</text>
+</g>
+<g transform="translate(64 504)">
+  <rect width="1072" height="50" rx="10" fill="#111827"/>
+  <circle cx="26" cy="25" r="9" fill="#22c55e"/>
+  <text x="50" y="32" font-size="22" fill="#f9fafb" font-weight="600">上下文 Context</text>
+  <text x="330" y="32" font-size="20" fill="#d1d5db">上下文完整 · context intact</text>
+  <text x="1052" y="32" font-size="20" fill="#22c55e" font-weight="700" text-anchor="end">通过 PASS</text>
+</g>
+  <text x="64" y="604" font-size="18" fill="#6b7280">npx relaycheck · 2026-10-31 · key 未离开本机 key never left the machine</text>
+</svg>

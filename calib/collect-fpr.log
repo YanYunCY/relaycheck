@@ -1,0 +1,5 @@
+(node:12818) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12918) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+gpt-6-luna: 11520 requests, 0 errors → calib/raw/fpr-gpt-6-luna.jsonl; total spend so far $0.1923

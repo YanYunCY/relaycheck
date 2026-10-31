@@ -1,0 +1,1 @@
+{"mode":"power","fast":true,"phi":1.098,"correct":"true","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"calib/raw/power-gpt-5-nano.jsonl","truth":"ref","w":0.8,"refN":100,"testN":24,"sims":500,"seed":5,"below_fail":299,"below_warn":492,"below_05":500,"secs":26.663,"medianP":0.0008679483713501246,"below_half":500}

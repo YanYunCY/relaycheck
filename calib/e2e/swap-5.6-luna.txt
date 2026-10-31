@@ -1,0 +1,23 @@
+INCONSISTENT: p=7.2e-15, does not behave like gpt-6-luna
+target: http://127.0.0.1:18990/v1  model: gpt-6-luna  api: responses  reference: gpt-6-luna  endpoint p-value: 7.2e-15  took: 116.4s  used: 591 req, 62880 in / 3247 out tokens
+
+✖ IDENTITY  likely model swap
+   ✖ Statistical fingerprint: p=7.2e-15: answer distributions differ significantly from the gpt-6-luna reference (mean JS=0.205; most different: digit_not7, catname, flower)
+   ℹ Self-reported identity: answered "OpenAI o3" (self-reports are unreliable; not used for the verdict)
+   ℹ Knowledge cutoff: claims knowledge cutoff: June 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-luna count
+
+✔ PROTOCOL  protocol intact
+   ✔ Tool-use round trip: define → call → result → answer all intact
+   ✔ SSE stream integrity: 27 events, sequence intact
+   ○ stop_sequences: not supported by this API
+   ✔ max_tokens truncation: truncated at 16 tokens with the right stop_reason
+   ✔ Response model field: echoed gpt-6-luna
+   ○ Thinking block & signature: Anthropic protocol only
+
+✔ BILLING  billing looks honest
+   ✔ Hidden injected tokens: billed input matches the official count exactly (diff 0; baseline: official gpt-6-luna baseline)
+   ✔ Prompt caching: second call read 3809 cached tokens (~76% of prompt)
+
+✔ CONTEXT  context intact
+   ✔ Needle in a haystack (context window): needle recalled at 2k / 32k (use --deep for 100k)

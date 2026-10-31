@@ -1,0 +1,391 @@
+{
+  "model": "mock-sonnet",
+  "api": "openai",
+  "created": "2026-10-31T00:00:00.000Z",
+  "samples": 200,
+  "probeSetVersion": 2,
+  "sampling": {
+    "api": "openai",
+    "temperature": 1,
+    "maxTokens": 16
+  },
+  "dispersion": {
+    "phi": 0.942,
+    "df": 447,
+    "blocks": 4,
+    "source": "fingerprint time blocks"
+  },
+  "synthetic": true,
+  "note": "SYNTHETIC reference generated from the relaycheck mock \"honest\" distribution (mock-sonnet). Not a real model fingerprint — for demos and tests only.",
+  "probes": [
+    {
+      "id": "letter10",
+      "prompt": "Pick one letter: A, B, C, D, E, F, G, H, I, J. Reply with only your choice, nothing else.",
+      "dist": {
+        "h": 89,
+        "e": 17,
+        "c": 13,
+        "f": 28,
+        "g": 13,
+        "i": 9,
+        "b": 7,
+        "d": 8,
+        "a": 8,
+        "j": 8
+      }
+    },
+    {
+      "id": "zh_animal",
+      "prompt": "从下面的动物中随机选一个：猫、狗、兔、马、熊、鹰。只回答一个字。",
+      "dist": {
+        "狗": 111,
+        "鹰": 18,
+        "猫": 16,
+        "熊": 38,
+        "兔": 8,
+        "马": 9
+      }
+    },
+    {
+      "id": "continent",
+      "prompt": "Pick one continent: Africa, Antarctica, Asia, Australia, Europe, North America, South America. Reply with only your choice, nothing else.",
+      "dist": {
+        "north america": 107,
+        "south america": 13,
+        "africa": 13,
+        "antarctica": 10,
+        "australia": 11,
+        "asia": 38,
+        "europe": 8
+      }
+    },
+    {
+      "id": "catname",
+      "prompt": "Pick a name for a kitten: Luna, Milo, Oliver, Leo, Bella, Max. Reply with only your choice, nothing else.",
+      "dist": {
+        "oliver": 45,
+        "leo": 109,
+        "luna": 17,
+        "bella": 9,
+        "milo": 11,
+        "max": 9
+      }
+    },
+    {
+      "id": "month",
+      "prompt": "Pick a random month of the year. Reply with only your choice, nothing else.",
+      "dist": {
+        "november": 60,
+        "september": 13,
+        "july": 10,
+        "april": 13,
+        "march": 11,
+        "may": 40,
+        "february": 9,
+        "october": 10,
+        "december": 8,
+        "june": 9,
+        "august": 8,
+        "january": 9
+      }
+    },
+    {
+      "id": "metal",
+      "prompt": "Pick one metal: gold, silver, copper, iron, tin, platinum. Reply with only your choice, nothing else.",
+      "dist": {
+        "platinum": 107,
+        "silver": 12,
+        "copper": 36,
+        "tin": 21,
+        "iron": 12,
+        "gold": 12
+      }
+    },
+    {
+      "id": "coin3",
+      "prompt": "Flip a fair coin three times. Reply with only the sequence using H and T, like HTH, nothing else.",
+      "dist": {
+        "hth": 98,
+        "hht": 11,
+        "tth": 9,
+        "htt": 34,
+        "thh": 10,
+        "tht": 18,
+        "ttt": 10,
+        "hhh": 10
+      }
+    },
+    {
+      "id": "flower",
+      "prompt": "Pick one flower: rose, tulip, daisy, lily, sunflower, orchid. Reply with only your choice, nothing else.",
+      "dist": {
+        "tulip": 18,
+        "orchid": 111,
+        "sunflower": 25,
+        "lily": 19,
+        "daisy": 14,
+        "rose": 13
+      }
+    },
+    {
+      "id": "sport",
+      "prompt": "Pick one sport: soccer, tennis, basketball, golf, swimming, cycling. Reply with only your choice, nothing else.",
+      "dist": {
+        "swimming": 120,
+        "golf": 9,
+        "soccer": 40,
+        "basketball": 19,
+        "tennis": 7,
+        "cycling": 5
+      }
+    },
+    {
+      "id": "daytime",
+      "prompt": "Pick one time of day: morning, afternoon, evening, night. Reply with only your choice, nothing else.",
+      "dist": {
+        "afternoon": 45,
+        "morning": 24,
+        "night": 116,
+        "evening": 15
+      }
+    },
+    {
+      "id": "one_to_20",
+      "prompt": "Pick a random whole number from 1 to 20. Reply with only your choice, nothing else.",
+      "dist": {
+        "1": 9,
+        "2": 13,
+        "3": 7,
+        "4": 7,
+        "5": 9,
+        "6": 7,
+        "7": 8,
+        "8": 48,
+        "9": 8,
+        "10": 3,
+        "11": 6,
+        "12": 8,
+        "13": 10,
+        "14": 7,
+        "15": 5,
+        "16": 4,
+        "17": 17,
+        "18": 7,
+        "19": 7,
+        "20": 10
+      }
+    },
+    {
+      "id": "weekday",
+      "prompt": "Pick a day of the week: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Reply with only your choice, nothing else.",
+      "dist": {
+        "tuesday": 98,
+        "saturday": 42,
+        "thursday": 12,
+        "sunday": 15,
+        "friday": 13,
+        "monday": 11,
+        "wednesday": 9
+      }
+    },
+    {
+      "id": "animal_rev",
+      "prompt": "Choose one animal: bear, fox, owl, dog, cat. Reply with only your choice, nothing else.",
+      "dist": {
+        "fox": 22,
+        "dog": 113,
+        "owl": 31,
+        "cat": 17,
+        "bear": 17
+      }
+    },
+    {
+      "id": "tree",
+      "prompt": "Pick one tree: oak, pine, maple, birch, willow, cedar. Reply with only your choice, nothing else.",
+      "dist": {
+        "willow": 14,
+        "birch": 47,
+        "cedar": 15,
+        "oak": 93,
+        "maple": 14,
+        "pine": 17
+      }
+    },
+    {
+      "id": "rps",
+      "prompt": "Play one round of rock paper scissors. Choose one: rock, paper, scissors. Reply with only your choice, nothing else.",
+      "dist": {
+        "rock": 126,
+        "scissors": 17,
+        "paper": 57
+      }
+    },
+    {
+      "id": "shape",
+      "prompt": "Pick one shape: circle, square, triangle, hexagon, star. Reply with only your choice, nothing else.",
+      "dist": {
+        "square": 118,
+        "triangle": 38,
+        "star": 18,
+        "hexagon": 14,
+        "circle": 12
+      }
+    },
+    {
+      "id": "planet",
+      "prompt": "Pick one planet: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune. Reply with only your choice, nothing else.",
+      "dist": {
+        "jupiter": 93,
+        "saturn": 28,
+        "earth": 16,
+        "venus": 11,
+        "mercury": 11,
+        "neptune": 12,
+        "uranus": 13,
+        "mars": 16
+      }
+    },
+    {
+      "id": "dessert",
+      "prompt": "Pick one dessert: cake, pie, cookie, pudding, brownie, donut. Reply with only your choice, nothing else.",
+      "dist": {
+        "cake": 100,
+        "cookie": 40,
+        "pie": 18,
+        "pudding": 21,
+        "donut": 8,
+        "brownie": 13
+      }
+    },
+    {
+      "id": "suit",
+      "prompt": "Pick one card suit: hearts, diamonds, clubs, spades. Reply with only your choice, nothing else.",
+      "dist": {
+        "spades": 134,
+        "clubs": 39,
+        "hearts": 10,
+        "diamonds": 17
+      }
+    },
+    {
+      "id": "digit_not7",
+      "prompt": "Pick a random digit from 0 to 9, but not 7. Reply with only your choice, nothing else.",
+      "dist": {
+        "0": 14,
+        "1": 29,
+        "2": 84,
+        "3": 8,
+        "4": 11,
+        "5": 5,
+        "6": 8,
+        "7": 14,
+        "8": 15,
+        "9": 12
+      }
+    },
+    {
+      "id": "season",
+      "prompt": "Pick one season: spring, summer, autumn, winter. Reply with only your choice, nothing else.",
+      "dist": {
+        "summer": 48,
+        "winter": 124,
+        "autumn": 16,
+        "spring": 12
+      }
+    },
+    {
+      "id": "animal",
+      "prompt": "Choose one animal: cat, dog, owl, fox, bear. Reply with only your choice, nothing else.",
+      "dist": {
+        "owl": 116,
+        "bear": 40,
+        "fox": 13,
+        "cat": 16,
+        "dog": 15
+      }
+    },
+    {
+      "id": "zh_color",
+      "prompt": "从下面的颜色中随机选一个：红、橙、黄、绿、蓝、紫。只回答一个字。",
+      "dist": {
+        "绿": 12,
+        "蓝": 104,
+        "红": 48,
+        "紫": 10,
+        "橙": 15,
+        "黄": 11
+      }
+    },
+    {
+      "id": "card_rank",
+      "prompt": "Draw one card from a shuffled standard deck. Reply with only its rank (A, 2-10, J, Q or K), nothing else.",
+      "dist": {
+        "2": 8,
+        "3": 5,
+        "4": 4,
+        "5": 12,
+        "6": 13,
+        "7": 6,
+        "8": 12,
+        "9": 15,
+        "10": 9,
+        "k": 61,
+        "a": 33,
+        "j": 11,
+        "q": 11
+      }
+    }
+  ],
+  "billing": {
+    "openai": {
+      "prompts": [
+        {
+          "id": "b1",
+          "hash": "70646876",
+          "inputTokens": 99
+        },
+        {
+          "id": "b4",
+          "hash": "3333af05",
+          "inputTokens": 343
+        },
+        {
+          "id": "b12",
+          "hash": "7fdb131d",
+          "inputTokens": 993
+        },
+        {
+          "id": "tokenizer",
+          "hash": "ee7fadea",
+          "inputTokens": 60
+        }
+      ],
+      "measuredAt": "2026-10-31T07:38:34.395Z"
+    },
+    "responses": {
+      "prompts": [
+        {
+          "id": "b1",
+          "hash": "70646876",
+          "inputTokens": 99
+        },
+        {
+          "id": "b4",
+          "hash": "3333af05",
+          "inputTokens": 343
+        },
+        {
+          "id": "b12",
+          "hash": "7fdb131d",
+          "inputTokens": 993
+        },
+        {
+          "id": "tokenizer",
+          "hash": "ee7fadea",
+          "inputTokens": 60
+        }
+      ],
+      "measuredAt": "2026-10-31T07:38:34.411Z"
+    }
+  }
+}

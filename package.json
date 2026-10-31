@@ -1,0 +1,53 @@
+{
+  "name": "relaycheck",
+  "version": "0.2.0",
+  "description": "Verify that an LLM relay / proxy / gateway really serves the model you pay for. 验货：一行命令验证中转站是否货真价实。",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "relaycheck": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "refs",
+    "docs/METHOD.md",
+    "docs/METHOD.zh-CN.md",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "demo": "bash scripts/demo.sh",
+    "refs": "npm run build && node scripts/gen-refs.mjs"
+  },
+  "keywords": [
+    "llm",
+    "proxy",
+    "relay",
+    "gateway",
+    "anthropic",
+    "openai",
+    "audit",
+    "fingerprint"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YanYunCY/relaycheck.git"
+  },
+  "homepage": "https://github.com/YanYunCY/relaycheck#readme",
+  "bugs": {
+    "url": "https://github.com/YanYunCY/relaycheck/issues"
+  }
+}

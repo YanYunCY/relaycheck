@@ -1,0 +1,2 @@
+{"mode":"null","truth":"ref","w":0,"refN":100,"testN":24,"sims":5000,"seed":21,"below_fail":2,"below_warn":44,"below_05":234,"secs":26.859}
+{"mode":"null","truth":"ref","w":0,"refN":100,"testN":24,"sims":5000,"seed":22,"below_fail":2,"below_warn":37,"below_05":222,"secs":23.836}

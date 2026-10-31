@@ -1,0 +1,1 @@
+{"mode":"null","phi":1.098,"correct":"true","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"ref","w":0,"refN":100,"testN":24,"sims":4000,"seed":9,"below_fail":2,"below_warn":32,"below_05":104,"secs":13.084,"medianP":0.9385060290128299,"below_half":258}

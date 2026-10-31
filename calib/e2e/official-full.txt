@@ -1,0 +1,23 @@
+CONSISTENT: behaves like gpt-6-luna (p=0.722); no protocol, billing, context anomalies
+target: https://api.openai.com/v1  model: gpt-6-luna  api: responses  reference: gpt-6-luna  endpoint p-value: 0.722  took: 230.5s  used: 592 req, 167356 in / 3336 out tokens
+
+✔ IDENTITY  identity consistent
+   ✔ Statistical fingerprint: p=0.722: consistent with the gpt-6-luna reference (24 probes × 24 samples, mean JS=0.025)
+   ✔ Self-reported identity: answered "GPT-5.2 Thinking", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: December 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-luna count
+
+✔ PROTOCOL  protocol intact
+   ✔ Tool-use round trip: define → call → result → answer all intact
+   ✔ SSE stream integrity: 27 events, sequence intact
+   ○ stop_sequences: not supported by this API
+   ✔ max_tokens truncation: truncated at 16 tokens with the right stop_reason
+   ✔ Response model field: echoed gpt-6-luna
+   ○ Thinking block & signature: Anthropic protocol only
+
+✔ BILLING  billing looks honest
+   ✔ Hidden injected tokens: billed input matches the official count exactly (diff 0; baseline: official gpt-6-luna baseline)
+   ✔ Prompt caching: second call read 3810 cached tokens (~76% of prompt)
+
+✔ CONTEXT  context intact
+   ✔ Needle in a haystack (context window): needle recalled at 2k / 32k / 100k

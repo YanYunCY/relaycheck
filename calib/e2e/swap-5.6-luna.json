@@ -1,0 +1,898 @@
+{
+  "tool": "relaycheck",
+  "version": "0.1.0",
+  "target": {
+    "baseUrl": "http://127.0.0.1:18990/v1",
+    "host": "127.0.0.1:18990",
+    "model": "gpt-6-luna",
+    "api": "responses"
+  },
+  "startedAt": "2026-10-31T07:46:32.738Z",
+  "durationMs": 116436,
+  "verdict": "inconsistent",
+  "exitCode": 1,
+  "headline": {
+    "zh": "不一致：p=7.2e-15，行为不像 gpt-6-luna",
+    "en": "INCONSISTENT: p=7.2e-15, does not behave like gpt-6-luna"
+  },
+  "pValue": 7.16093850883226e-15,
+  "calibrated": true,
+  "injectedTokens": 0,
+  "reference": {
+    "path": "/workspace/projects/6f683446-3a9a-4866-b478-51e28e3dbb80/relaycheck/refs/gpt-6-luna.json",
+    "model": "gpt-6-luna",
+    "samples": 100,
+    "synthetic": false,
+    "probeSetVersion": 2
+  },
+  "usage": {
+    "requests": 591,
+    "inputTokens": 62880,
+    "outputTokens": 3247
+  },
+  "groups": [
+    {
+      "id": "identity",
+      "status": "fail",
+      "summary": {
+        "zh": "疑似换模型",
+        "en": "likely model swap"
+      },
+      "results": [
+        {
+          "id": "identity.fingerprint",
+          "status": "fail",
+          "title": {
+            "zh": "统计指纹",
+            "en": "Statistical fingerprint"
+          },
+          "detail": {
+            "zh": "p=7.2e-15，回答分布与 gpt-6-luna 参考指纹显著不同（平均 JS=0.205；差异最大：digit_not7, catname, flower）",
+            "en": "p=7.2e-15: answer distributions differ significantly from the gpt-6-luna reference (mean JS=0.205; most different: digit_not7, catname, flower)"
+          },
+          "evidence": {
+            "calibrated": true,
+            "pValue": 7.16093850883226e-15,
+            "combination": "cauchy",
+            "thresholds": {
+              "fail": 0.001,
+              "warn": 0.01
+            },
+            "probeSetVersion": 2,
+            "dispersion": 1.098,
+            "samplesPerProbe": 24,
+            "informativeProbes": 23,
+            "errorRate": 0,
+            "meanJs": 0.20531249999999998,
+            "unclassifiedExamples": {},
+            "probes": [
+              {
+                "id": "letter10",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.00022498875056247187,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 18.313,
+                "df": 2,
+                "js": 0.3113,
+                "observed": {
+                  "g": 24
+                },
+                "reference": {
+                  "a": 36,
+                  "g": 50,
+                  "c": 14
+                }
+              },
+              {
+                "id": "zh_animal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.04836759371221282,
+                "method": "monte-carlo",
+                "reps": 827,
+                "chi2": 10.955,
+                "df": 5,
+                "js": 0.1279,
+                "observed": {
+                  "猫": 4,
+                  "熊": 8,
+                  "狗": 2,
+                  "兔": 10
+                },
+                "reference": {
+                  "兔": 55,
+                  "鹰": 11,
+                  "猫": 10,
+                  "狗": 12,
+                  "马": 2,
+                  "熊": 10
+                }
+              },
+              {
+                "id": "continent",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0012749362531873406,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 13.45,
+                "df": 2,
+                "js": 0.203,
+                "observed": {
+                  "asia": 22,
+                  "south america": 2
+                },
+                "reference": {
+                  "asia": 49,
+                  "africa": 23,
+                  "south america": 28
+                }
+              },
+              {
+                "id": "catname",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1.4265031387272165e-15,
+                "method": "asymptotic-tail",
+                "reps": 200000,
+                "chi2": 63.731,
+                "df": 1,
+                "js": 0.7091,
+                "observed": {
+                  "luna": 24
+                },
+                "reference": {
+                  "milo": 87,
+                  "luna": 13
+                }
+              },
+              {
+                "id": "month",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.028050490883590462,
+                "method": "monte-carlo",
+                "reps": 1426,
+                "chi2": 7.294,
+                "df": 2,
+                "js": 0.1113,
+                "observed": {
+                  "september": 22,
+                  "october": 2
+                },
+                "reference": {
+                  "september": 62,
+                  "october": 28,
+                  "november": 10
+                }
+              },
+              {
+                "id": "metal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.21164021164021163,
+                "method": "monte-carlo",
+                "reps": 189,
+                "chi2": 2.913,
+                "df": 2,
+                "js": 0.032,
+                "observed": {
+                  "gold": 16,
+                  "copper": 6,
+                  "platinum": 2
+                },
+                "reference": {
+                  "gold": 49,
+                  "copper": 45,
+                  "platinum": 6
+                }
+              },
+              {
+                "id": "coin3",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.06557377049180328,
+                "method": "monte-carlo",
+                "reps": 610,
+                "chi2": 4.957,
+                "df": 2,
+                "js": 0.1027,
+                "observed": {
+                  "tht": 22,
+                  "hth": 2
+                },
+                "reference": {
+                  "tht": 73,
+                  "htt": 19,
+                  "hth": 8
+                }
+              },
+              {
+                "id": "flower",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 42.133,
+                "df": 2,
+                "js": 0.3404,
+                "observed": {
+                  "sunflower": 8,
+                  "orchid": 16
+                },
+                "reference": {
+                  "tulip": 14,
+                  "sunflower": 79,
+                  "orchid": 7
+                }
+              },
+              {
+                "id": "sport",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.01755926251097454,
+                "method": "monte-carlo",
+                "reps": 2278,
+                "chi2": 5.588,
+                "df": 1,
+                "js": 0.0836,
+                "observed": {
+                  "soccer": 23,
+                  "tennis": 1
+                },
+                "reference": {
+                  "soccer": 72,
+                  "tennis": 28
+                }
+              },
+              {
+                "id": "daytime",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.7843137254901961,
+                "method": "monte-carlo",
+                "reps": 51,
+                "chi2": 0.742,
+                "df": 2,
+                "js": 0.0096,
+                "observed": {
+                  "morning": 22,
+                  "afternoon": 1,
+                  "evening": 1
+                },
+                "reference": {
+                  "morning": 86,
+                  "evening": 4,
+                  "afternoon": 10
+                }
+              },
+              {
+                "id": "one_to_20",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 47.526,
+                "df": 3,
+                "js": 0.3072,
+                "observed": {
+                  "7": 3,
+                  "13": 7,
+                  "14": 6,
+                  "17": 8
+                },
+                "reference": {
+                  "13": 76,
+                  "14": 24
+                }
+              },
+              {
+                "id": "weekday",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.20202020202020202,
+                "method": "monte-carlo",
+                "reps": 198,
+                "chi2": 1.793,
+                "df": 1,
+                "js": 0.0215,
+                "observed": {
+                  "thursday": 21,
+                  "wednesday": 3
+                },
+                "reference": {
+                  "thursday": 74,
+                  "wednesday": 26
+                }
+              },
+              {
+                "id": "animal_rev",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.002687991398427525,
+                "method": "monte-carlo",
+                "reps": 14881,
+                "chi2": 10.081,
+                "df": 1,
+                "js": 0.0717,
+                "observed": {
+                  "owl": 7,
+                  "fox": 17
+                },
+                "reference": {
+                  "owl": 6,
+                  "fox": 94
+                }
+              },
+              {
+                "id": "tree",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 34.339,
+                "df": 1,
+                "js": 0.2354,
+                "observed": {
+                  "oak": 13,
+                  "maple": 11
+                },
+                "reference": {
+                  "maple": 95,
+                  "oak": 5
+                }
+              },
+              {
+                "id": "rps",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.25316455696202533,
+                "method": "monte-carlo",
+                "reps": 158,
+                "chi2": 2.985,
+                "df": 2,
+                "js": 0.0252,
+                "observed": {
+                  "scissors": 16,
+                  "rock": 6,
+                  "paper": 2
+                },
+                "reference": {
+                  "scissors": 81,
+                  "paper": 8,
+                  "rock": 11
+                }
+              },
+              {
+                "id": "shape",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 46.342,
+                "df": 2,
+                "js": 0.3821,
+                "observed": {
+                  "hexagon": 5,
+                  "circle": 17,
+                  "triangle": 2
+                },
+                "reference": {
+                  "hexagon": 89,
+                  "circle": 11
+                }
+              },
+              {
+                "id": "planet",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 60.708,
+                "df": 2,
+                "js": 0.4878,
+                "observed": {
+                  "earth": 19,
+                  "neptune": 1,
+                  "mars": 4
+                },
+                "reference": {
+                  "mars": 93,
+                  "earth": 7
+                }
+              },
+              {
+                "id": "dessert",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.00002013747180753947,
+                "method": "monte-carlo",
+                "reps": 74487,
+                "chi2": 29.972,
+                "df": 3,
+                "js": 0.1886,
+                "observed": {
+                  "brownie": 14,
+                  "pie": 2,
+                  "cake": 4,
+                  "cookie": "[REDACTED]"
+                },
+                "reference": {
+                  "brownie": 96,
+                  "cookie": "[REDACTED]"
+                }
+              },
+              {
+                "id": "suit",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.000011681515170394368,
+                "method": "monte-carlo",
+                "reps": 128407,
+                "chi2": 24.288,
+                "df": 1,
+                "js": 0.2155,
+                "observed": {
+                  "spades": 17,
+                  "hearts": 7
+                },
+                "reference": {
+                  "hearts": 82,
+                  "spades": 18
+                }
+              },
+              {
+                "id": "digit_not7",
+                "n": 24,
+                "errors": 0,
+                "pValue": 3.964437805253674e-16,
+                "method": "asymptotic-tail",
+                "reps": 200000,
+                "chi2": 66.254,
+                "df": 1,
+                "js": 0.7249,
+                "observed": {
+                  "3": 24
+                },
+                "reference": {
+                  "3": 12,
+                  "4": 88
+                }
+              },
+              {
+                "id": "season",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.08213552361396304,
+                "method": "monte-carlo",
+                "reps": 487,
+                "chi2": 3.455,
+                "df": 1,
+                "js": 0.0243,
+                "observed": {
+                  "spring": 3,
+                  "autumn": 21
+                },
+                "reference": {
+                  "autumn": 97,
+                  "spring": 3
+                }
+              },
+              {
+                "id": "animal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.02151694459386767,
+                "method": "monte-carlo",
+                "reps": 1859,
+                "chi2": 7.195,
+                "df": 2,
+                "js": 0.0542,
+                "observed": {
+                  "owl": 12,
+                  "fox": 11,
+                  "cat": 1
+                },
+                "reference": {
+                  "owl": 73,
+                  "fox": 27
+                }
+              },
+              {
+                "id": "zh_color",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0031583103039873666,
+                "method": "monte-carlo",
+                "reps": 12665,
+                "chi2": 10.68,
+                "df": 2,
+                "js": 0.1582,
+                "observed": {
+                  "蓝": 23,
+                  "绿": 1
+                },
+                "reference": {
+                  "绿": 40,
+                  "蓝": 59,
+                  "紫": 1
+                }
+              },
+              {
+                "id": "card_rank",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1,
+                "method": "monte-carlo",
+                "reps": 0,
+                "chi2": 0,
+                "df": 0,
+                "js": 0,
+                "observed": {
+                  "7": 24
+                },
+                "reference": {
+                  "7": 100
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "identity.self_report",
+          "status": "info",
+          "title": {
+            "zh": "自报身份",
+            "en": "Self-reported identity"
+          },
+          "detail": {
+            "zh": "自称「OpenAI o3」（自报不可靠，不参与判定）",
+            "en": "answered \"OpenAI o3\" (self-reports are unreliable; not used for the verdict)"
+          },
+          "evidence": {
+            "answer": "OpenAI o3",
+            "foreignFamilies": []
+          }
+        },
+        {
+          "id": "identity.cutoff",
+          "status": "info",
+          "title": {
+            "zh": "知识截止",
+            "en": "Knowledge cutoff"
+          },
+          "detail": {
+            "zh": "自称知识截止：June 2024",
+            "en": "claims knowledge cutoff: June 2024"
+          },
+          "evidence": {
+            "answer": "June 2024"
+          }
+        },
+        {
+          "id": "identity.tokenizer",
+          "status": "info",
+          "title": {
+            "zh": "分词器长度特征",
+            "en": "Tokenizer length signature"
+          },
+          "detail": {
+            "zh": "固定文本计 74 input token，与 gpt-6-luna 官方计数一致",
+            "en": "fixed text billed as 74 input tokens, same as the official gpt-6-luna count"
+          },
+          "evidence": {
+            "inputTokens": 74,
+            "referenceInputTokens": 74,
+            "chars": 146,
+            "charsPerToken": 1.97,
+            "localEstimate": 47,
+            "matchesReference": true
+          }
+        }
+      ],
+      "meta": {
+        "pValue": 7.16093850883226e-15,
+        "calibrated": true
+      }
+    },
+    {
+      "id": "protocol",
+      "status": "pass",
+      "summary": {
+        "zh": "协议保真",
+        "en": "protocol intact"
+      },
+      "results": [
+        {
+          "id": "protocol.tool_use",
+          "status": "pass",
+          "title": {
+            "zh": "工具调用往返",
+            "en": "Tool-use round trip"
+          },
+          "detail": {
+            "zh": "定义→调用→回传→答复 全链路正常",
+            "en": "define → call → result → answer all intact"
+          },
+          "evidence": {
+            "call": {
+              "id": "call_WICoDiI0JXF6nd850v4UpsjJ",
+              "name": "get_weather",
+              "input": {
+                "city": "Paris"
+              }
+            },
+            "firstStop": "completed",
+            "finalText": "The verification code is **WX-783BF8**.",
+            "code": "WX-783BF8"
+          }
+        },
+        {
+          "id": "protocol.sse",
+          "status": "pass",
+          "title": {
+            "zh": "SSE 流完整性",
+            "en": "SSE stream integrity"
+          },
+          "detail": {
+            "zh": "27 个事件，序列完整",
+            "en": "27 events, sequence intact"
+          },
+          "evidence": {
+            "eventCount": 27,
+            "events": [
+              "response.created",
+              "response.in_progress",
+              "response.output_item.added",
+              "response.content_part.added",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.delta",
+              "response.output_text.done",
+              "response.content_part.done",
+              "response.output_item.done",
+              "response.completed"
+            ],
+            "problems": [],
+            "text": "1 2 3 4 5 6 7 8 9 10",
+            "stop": "completed",
+            "usage": {
+              "input": 24,
+              "output": 23,
+              "cacheRead": 0,
+              "cacheWrite": null
+            }
+          }
+        },
+        {
+          "id": "protocol.stop_sequences",
+          "status": "skip",
+          "title": {
+            "zh": "stop_sequences",
+            "en": "stop_sequences"
+          },
+          "detail": {
+            "zh": "该协议不支持 stop 参数",
+            "en": "not supported by this API"
+          }
+        },
+        {
+          "id": "protocol.max_tokens",
+          "status": "pass",
+          "title": {
+            "zh": "max_tokens 截断",
+            "en": "max_tokens truncation"
+          },
+          "detail": {
+            "zh": "在 16 token 处截断，stop_reason 正确",
+            "en": "truncated at 16 tokens with the right stop_reason"
+          },
+          "evidence": {
+            "limit": 16,
+            "outputTokens": 16,
+            "stop": "incomplete:max_output_tokens",
+            "text": "Bridges are among humanity’s oldest and most important inventions. They"
+          }
+        },
+        {
+          "id": "protocol.model_echo",
+          "status": "pass",
+          "title": {
+            "zh": "model 字段回显",
+            "en": "Response model field"
+          },
+          "detail": {
+            "zh": "回显 gpt-6-luna",
+            "en": "echoed gpt-6-luna"
+          },
+          "evidence": {
+            "requested": "gpt-6-luna",
+            "echoed": "gpt-6-luna"
+          }
+        },
+        {
+          "id": "protocol.thinking",
+          "status": "skip",
+          "title": {
+            "zh": "thinking 块与签名",
+            "en": "Thinking block & signature"
+          },
+          "detail": {
+            "zh": "仅 Anthropic 协议检查",
+            "en": "Anthropic protocol only"
+          }
+        }
+      ],
+      "meta": {
+        "failed": []
+      }
+    },
+    {
+      "id": "billing",
+      "status": "pass",
+      "summary": {
+        "zh": "计费正常",
+        "en": "billing looks honest"
+      },
+      "results": [
+        {
+          "id": "billing.hidden_tokens",
+          "status": "pass",
+          "title": {
+            "zh": "隐藏注入 token",
+            "en": "Hidden injected tokens"
+          },
+          "detail": {
+            "zh": "计费与官方基准逐 token 一致（差 0，基准：官方基准 gpt-6-luna）",
+            "en": "billed input matches the official count exactly (diff 0; baseline: official gpt-6-luna baseline)"
+          },
+          "evidence": {
+            "method": "reference_baseline",
+            "calibrated": true,
+            "baselineMeasuredAt": "2026-10-31T07:26:20.065Z",
+            "samples": [
+              {
+                "id": "b1",
+                "baseline": 80,
+                "billed": 80,
+                "excess": 0
+              },
+              {
+                "id": "b4",
+                "baseline": 257,
+                "billed": 257,
+                "excess": 0
+              },
+              {
+                "id": "b12",
+                "baseline": 729,
+                "billed": 729,
+                "excess": 0
+              }
+            ],
+            "analysis": {
+              "status": "pass",
+              "excess": 0,
+              "slope": 1,
+              "kind": "match"
+            },
+            "thresholds": {
+              "warn": 4,
+              "fail": 16
+            },
+            "injectedTokens": 0
+          }
+        },
+        {
+          "id": "billing.prompt_cache",
+          "status": "pass",
+          "title": {
+            "zh": "提示缓存",
+            "en": "Prompt caching"
+          },
+          "detail": {
+            "zh": "第二次命中缓存 3809 token（约占提示 76%）",
+            "en": "second call read 3809 cached tokens (~76% of prompt)"
+          },
+          "evidence": {
+            "promptEstimate": 5024,
+            "first": {
+              "input": 3812,
+              "output": 5,
+              "cacheRead": 0,
+              "cacheWrite": null
+            },
+            "second": {
+              "input": 3812,
+              "output": 5,
+              "cacheRead": 3809,
+              "cacheWrite": null
+            },
+            "attempts": 2,
+            "ratio": 0.76
+          }
+        }
+      ],
+      "meta": {
+        "injectedTokens": 0
+      }
+    },
+    {
+      "id": "context",
+      "status": "pass",
+      "summary": {
+        "zh": "上下文完整",
+        "en": "context intact"
+      },
+      "results": [
+        {
+          "id": "context.needle",
+          "status": "pass",
+          "title": {
+            "zh": "大海捞针（上下文窗口）",
+            "en": "Needle in a haystack (context window)"
+          },
+          "detail": {
+            "zh": "在 2k / 32k 均找回 needle（--deep 可测 100k）",
+            "en": "needle recalled at 2k / 32k (use --deep for 100k)"
+          },
+          "evidence": {
+            "outcomes": [
+              {
+                "targetTokens": 2000,
+                "recalled": [
+                  true,
+                  true,
+                  true
+                ],
+                "answer": "RC-94A695 RC-9CBE87 RC-8DACEB",
+                "stop": "completed",
+                "billedInput": 2185,
+                "found": true
+              },
+              {
+                "targetTokens": 32000,
+                "recalled": [
+                  true,
+                  true,
+                  true
+                ],
+                "answer": "RC-718775 RC-74B5D8 RC-D25399",
+                "stop": "completed",
+                "billedInput": 33484,
+                "found": true
+              }
+            ],
+            "approxInputTokens": 34000
+          }
+        }
+      ],
+      "meta": {
+        "truncatedBetween": null
+      }
+    }
+  ]
+}

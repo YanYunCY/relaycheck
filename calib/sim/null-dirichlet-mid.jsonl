@@ -1,0 +1,5 @@
+{"mode":"null","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":1,"below_fail":1,"below_warn":8,"below_05":49,"secs":6.641}
+{"mode":"null","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":2,"below_fail":1,"below_warn":4,"below_05":48,"secs":5.565}
+{"mode":"null","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":3,"below_fail":0,"below_warn":11,"below_05":45,"secs":7.176}
+{"mode":"null","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":4,"below_fail":1,"below_warn":13,"below_05":39,"secs":5.41}
+{"mode":"null","pv":"mid","ref":"refs/gpt-6-luna.json","alt":"","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":5,"below_fail":0,"below_warn":4,"below_05":39,"secs":5.248}

@@ -1,0 +1,12 @@
+INCONSISTENT: +37 hidden input tokens per request
+target: http://127.0.0.1:18991/v1  model: gpt-6-luna  api: responses  reference: gpt-6-luna  endpoint p-value: 0.001  took: 329.1s  used: 584 req, 48552 in / 3197 out tokens
+
+▲ IDENTITY  identity uncertain
+   ▲ Statistical fingerprint: p=0.001: mild deviation from the reference (error rate 0%); re-run with more --samples
+   ✔ Self-reported identity: answered "GPT-4.1-mini", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: December 2024
+   ℹ Tokenizer length signature: fixed text billed as 111 tokens vs 74 for official gpt-6-luna (different tokenizer or injected prompt; see billing)
+
+✖ BILLING  +37 hidden input tokens per request
+   ✖ Hidden injected tokens: exactly 37 extra input tokens on every request vs the official count: a hidden per-request prompt
+   ✔ Prompt caching: second call read 3843 cached tokens (~76% of prompt)

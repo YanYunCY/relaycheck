@@ -1,0 +1,4 @@
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":31,"below_fail":3,"below_warn":17,"below_05":65,"secs":14.936}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":32,"below_fail":0,"below_warn":10,"below_05":49,"secs":15.153}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":33,"below_fail":0,"below_warn":8,"below_05":55,"secs":11.408}
+{"mode":"null","truth":"dirichlet","w":0,"refN":100,"testN":24,"sims":1000,"seed":34,"below_fail":1,"below_warn":11,"below_05":53,"secs":11.826}

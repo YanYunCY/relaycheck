@@ -1,0 +1,132 @@
+{
+  "model": "gpt-6-luna",
+  "api": "responses",
+  "created": "2026-10-31T06:35:03.032Z",
+  "samples": 100,
+  "probes": [
+    {
+      "id": "digit",
+      "prompt": "Pick a random digit from 0 to 9. Reply with only your choice, nothing else.",
+      "dist": {
+        "7": 100
+      }
+    },
+    {
+      "id": "color",
+      "prompt": "Choose one color: red, blue, green, yellow, purple, orange. Reply with only your choice, nothing else.",
+      "dist": {
+        "blue": 100
+      }
+    },
+    {
+      "id": "letter",
+      "prompt": "Pick one letter: A, B, C, D, E. Reply with only your choice, nothing else.",
+      "dist": {
+        "c": 100
+      }
+    },
+    {
+      "id": "animal",
+      "prompt": "Choose one animal: cat, dog, owl, fox, bear. Reply with only your choice, nothing else.",
+      "dist": {
+        "owl": 82,
+        "fox": 18
+      }
+    },
+    {
+      "id": "fruit",
+      "prompt": "Choose one fruit: apple, banana, cherry, mango, grape. Reply with only your choice, nothing else.",
+      "dist": {
+        "mango": 100
+      }
+    },
+    {
+      "id": "coin",
+      "prompt": "Simulate a coin flip: heads or tails. Reply with only your choice, nothing else.",
+      "dist": {
+        "heads": 95,
+        "tails": 5
+      }
+    },
+    {
+      "id": "one_to_five",
+      "prompt": "Pick a whole number from 1 to 5. Reply with only your choice, nothing else.",
+      "dist": {
+        "3": 100
+      }
+    },
+    {
+      "id": "weekday",
+      "prompt": "Pick a day of the week: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Reply with only your choice, nothing else.",
+      "dist": {
+        "wednesday": 28,
+        "thursday": 72
+      }
+    },
+    {
+      "id": "planet",
+      "prompt": "Pick one planet: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune. Reply with only your choice, nothing else.",
+      "dist": {
+        "mars": 92,
+        "neptune": 1,
+        "earth": 7
+      }
+    },
+    {
+      "id": "season",
+      "prompt": "Pick one season: spring, summer, autumn, winter. Reply with only your choice, nothing else.",
+      "dist": {
+        "autumn": 95,
+        "spring": 5
+      }
+    },
+    {
+      "id": "shape",
+      "prompt": "Pick one shape: circle, square, triangle, hexagon, star. Reply with only your choice, nothing else.",
+      "dist": {
+        "hexagon": 79,
+        "circle": 20,
+        "triangle": 1
+      }
+    },
+    {
+      "id": "element",
+      "prompt": "Pick one classical element: fire, water, earth, air. Reply with only your choice, nothing else.",
+      "dist": {
+        "fire": 57,
+        "water": 43
+      }
+    },
+    {
+      "id": "suit",
+      "prompt": "Pick one card suit: hearts, diamonds, clubs, spades. Reply with only your choice, nothing else.",
+      "dist": {
+        "hearts": 79,
+        "spades": 21
+      }
+    },
+    {
+      "id": "direction",
+      "prompt": "Pick one compass direction: north, south, east, west. Reply with only your choice, nothing else.",
+      "dist": {
+        "north": 98,
+        "east": 2
+      }
+    },
+    {
+      "id": "instrument",
+      "prompt": "Pick one instrument: piano, guitar, violin, drums, flute. Reply with only your choice, nothing else.",
+      "dist": {
+        "piano": 97,
+        "guitar": 3
+      }
+    },
+    {
+      "id": "gem",
+      "prompt": "Pick one gemstone: ruby, emerald, sapphire, diamond, amethyst. Reply with only your choice, nothing else.",
+      "dist": {
+        "sapphire": 100
+      }
+    }
+  ]
+}
