@@ -1,0 +1,8 @@
+CONSISTENT: behaves like gpt-5.3-codex (p=0.896)
+target: http://127.0.0.1:18983/v1  model: gpt-5.3-codex  api: responses  reference: gpt-5.3-codex  endpoint p-value: 0.896  took: 140.9s  used: 579 req, 18260 in / 3151 out tokens
+
+✔ IDENTITY  identity consistent
+   ✔ Statistical fingerprint: p=0.896: consistent with the gpt-5.3-codex reference (24 probes × 24 samples, mean JS=0.016)
+   ✔ Self-reported identity: answered "GPT-5", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: June 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-5.3-codex count

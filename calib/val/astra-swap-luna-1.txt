@@ -1,0 +1,8 @@
+INCONSISTENT: p=1.1e-5, does not behave like gpt-6-astra
+target: http://127.0.0.1:18991/v1  model: gpt-6-astra  api: responses  reference: gpt-6-astra  endpoint p-value: 1.1e-5  took: 154.9s  used: 579 req, 18260 in / 7137 out tokens
+
+✖ IDENTITY  likely model swap
+   ✖ Statistical fingerprint: p=1.1e-5: answer distributions differ significantly from the gpt-6-astra reference (mean JS=0.311; most different: letter10, zh_animal, continent)
+   ✔ Self-reported identity: answered "OpenAI GPT-5.2", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: June 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-astra count

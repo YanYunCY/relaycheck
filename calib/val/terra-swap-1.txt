@@ -1,0 +1,8 @@
+INCONSISTENT: p=1.7e-8, does not behave like gpt-6.1-terra
+target: http://127.0.0.1:18991/v1  model: gpt-6.1-terra  api: responses  reference: gpt-6.1-terra  endpoint p-value: 1.7e-8  took: 139.9s  used: 579 req, 18260 in / 3171 out tokens
+
+✖ IDENTITY  likely model swap
+   ✖ Statistical fingerprint: p=1.7e-8: answer distributions differ significantly from the gpt-6.1-terra reference (mean JS=0.215; most different: catname, letter10, zh_animal)
+   ✔ Self-reported identity: answered "GPT-5.2 Thinking", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: December 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6.1-terra count

@@ -1,0 +1,8 @@
+INCONSISTENT: p=4.1e-6, does not behave like gpt-5.3-codex
+target: http://127.0.0.1:18991/v1  model: gpt-5.3-codex  api: responses  reference: gpt-5.3-codex  endpoint p-value: 4.1e-6  took: 138.0s  used: 579 req, 18260 in / 3179 out tokens
+
+✖ IDENTITY  likely model swap
+   ✖ Statistical fingerprint: p=4.1e-6: answer distributions differ significantly from the gpt-5.3-codex reference (mean JS=0.325; most different: tree, letter10, zh_animal)
+   ℹ Self-reported identity: answered "OpenAI o3-mini" (self-reports are unreliable; not used for the verdict)
+   ℹ Knowledge cutoff: claims knowledge cutoff: December 2025
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-5.3-codex count

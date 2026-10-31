@@ -1,0 +1,607 @@
+{
+  "tool": "relaycheck",
+  "version": "0.2.0",
+  "target": {
+    "baseUrl": "http://127.0.0.1:18991/v1",
+    "host": "127.0.0.1:18991",
+    "model": "gpt-5.3-codex",
+    "api": "responses"
+  },
+  "startedAt": "2026-10-31T13:59:35.260Z",
+  "durationMs": 137999,
+  "verdict": "inconsistent",
+  "exitCode": 1,
+  "headline": {
+    "zh": "不一致：p=4.1e-6，行为不像 gpt-5.3-codex",
+    "en": "INCONSISTENT: p=4.1e-6, does not behave like gpt-5.3-codex"
+  },
+  "pValue": 0.0000040957359243587455,
+  "calibrated": true,
+  "injectedTokens": null,
+  "reference": {
+    "path": "/workspace/projects/6f683446-3a9a-4866-b478-51e28e3dbb80/relaycheck/refs/gpt-5.3-codex.json",
+    "model": "gpt-5.3-codex",
+    "samples": 100,
+    "synthetic": false,
+    "probeSetVersion": 2
+  },
+  "usage": {
+    "requests": 579,
+    "inputTokens": 18260,
+    "outputTokens": 3179
+  },
+  "groups": [
+    {
+      "id": "identity",
+      "status": "fail",
+      "summary": {
+        "zh": "疑似换模型",
+        "en": "likely model swap"
+      },
+      "results": [
+        {
+          "id": "identity.fingerprint",
+          "status": "fail",
+          "title": {
+            "zh": "统计指纹",
+            "en": "Statistical fingerprint"
+          },
+          "detail": {
+            "zh": "p=4.1e-6，回答分布与 gpt-5.3-codex 参考指纹显著不同（平均 JS=0.325；差异最大：tree, letter10, zh_animal）",
+            "en": "p=4.1e-6: answer distributions differ significantly from the gpt-5.3-codex reference (mean JS=0.325; most different: tree, letter10, zh_animal)"
+          },
+          "evidence": {
+            "calibrated": true,
+            "pValue": 0.0000040957359243587455,
+            "combination": "cauchy",
+            "thresholds": {
+              "fail": 0.001,
+              "warn": 0.01
+            },
+            "probeSetVersion": 2,
+            "dispersion": 1.023,
+            "samplesPerProbe": 24,
+            "informativeProbes": 24,
+            "errorRate": 0,
+            "meanJs": 0.32505416666666664,
+            "unclassifiedExamples": {},
+            "probes": [
+              {
+                "id": "letter10",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 80.242,
+                "df": 2,
+                "js": 0.5023,
+                "observed": {
+                  "c": 5,
+                  "a": 12,
+                  "g": 7
+                },
+                "reference": {
+                  "g": 100
+                }
+              },
+              {
+                "id": "zh_animal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 66.936,
+                "df": 5,
+                "js": 0.6254,
+                "observed": {
+                  "猫": 5,
+                  "鹰": 3,
+                  "兔": 8,
+                  "熊": 4,
+                  "狗": 4
+                },
+                "reference": {
+                  "马": 70,
+                  "兔": 8,
+                  "熊": 2,
+                  "狗": 20
+                }
+              },
+              {
+                "id": "continent",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 36.36,
+                "df": 3,
+                "js": 0.2394,
+                "observed": {
+                  "africa": 5,
+                  "asia": 13,
+                  "south america": 6
+                },
+                "reference": {
+                  "asia": 88,
+                  "europe": 8,
+                  "africa": 4
+                }
+              },
+              {
+                "id": "catname",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 79.851,
+                "df": 1,
+                "js": 0.512,
+                "observed": {
+                  "luna": 6,
+                  "milo": 18
+                },
+                "reference": {
+                  "luna": 99,
+                  "milo": 1
+                }
+              },
+              {
+                "id": "month",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0036281179138321997,
+                "method": "monte-carlo",
+                "reps": 11025,
+                "chi2": 15.266,
+                "df": 3,
+                "js": 0.1037,
+                "observed": {
+                  "september": 16,
+                  "october": 7,
+                  "november": 1
+                },
+                "reference": {
+                  "september": 88,
+                  "october": 4,
+                  "november": 5,
+                  "april": 3
+                }
+              },
+              {
+                "id": "metal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 39.26,
+                "df": 4,
+                "js": 0.2905,
+                "observed": {
+                  "platinum": 4,
+                  "gold": 13,
+                  "copper": 7
+                },
+                "reference": {
+                  "copper": 70,
+                  "platinum": 14,
+                  "gold": 5,
+                  "silver": 8,
+                  "iron": 3
+                }
+              },
+              {
+                "id": "coin3",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.003427004797806717,
+                "method": "monte-carlo",
+                "reps": 11672,
+                "chi2": 15.767,
+                "df": 4,
+                "js": 0.2118,
+                "observed": {
+                  "tht": 21,
+                  "hth": 2,
+                  "htt": 1
+                },
+                "reference": {
+                  "tht": 43,
+                  "htt": 19,
+                  "hth": 16,
+                  "tth": 20,
+                  "thh": 2
+                }
+              },
+              {
+                "id": "flower",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 108.932,
+                "df": 2,
+                "js": 0.7881,
+                "observed": {
+                  "sunflower": 19,
+                  "tulip": 3,
+                  "orchid": 2
+                },
+                "reference": {
+                  "orchid": 100
+                }
+              },
+              {
+                "id": "sport",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.00007499625018749062,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 19.557,
+                "df": 2,
+                "js": 0.1853,
+                "observed": {
+                  "tennis": 14,
+                  "soccer": 10
+                },
+                "reference": {
+                  "soccer": 71,
+                  "basketball": 13,
+                  "tennis": 16
+                }
+              },
+              {
+                "id": "daytime",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 57.975,
+                "df": 3,
+                "js": 0.6415,
+                "observed": {
+                  "morning": 23,
+                  "afternoon": 1
+                },
+                "reference": {
+                  "morning": 18,
+                  "evening": 81,
+                  "night": 1
+                }
+              },
+              {
+                "id": "one_to_20",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0005249737513124343,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 16.565,
+                "df": 2,
+                "js": 0.1313,
+                "observed": {
+                  "13": 15,
+                  "14": 9
+                },
+                "reference": {
+                  "13": 86,
+                  "14": 7,
+                  "17": 7
+                }
+              },
+              {
+                "id": "weekday",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.00012499375031248437,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 25.681,
+                "df": 1,
+                "js": 0.1379,
+                "observed": {
+                  "wednesday": 6,
+                  "thursday": 18
+                },
+                "reference": {
+                  "thursday": 100
+                }
+              },
+              {
+                "id": "animal_rev",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 96.999,
+                "df": 1,
+                "js": 0.6783,
+                "observed": {
+                  "fox": 21,
+                  "owl": 3
+                },
+                "reference": {
+                  "owl": 99,
+                  "fox": 1
+                }
+              },
+              {
+                "id": "tree",
+                "n": 24,
+                "errors": 0,
+                "pValue": 2.7673779836453983e-7,
+                "method": "asymptotic-tail",
+                "reps": 200000,
+                "chi2": 26.406,
+                "df": 1,
+                "js": 0.3868,
+                "observed": {
+                  "maple": 24
+                },
+                "reference": {
+                  "maple": 41,
+                  "oak": 59
+                }
+              },
+              {
+                "id": "rps",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 54.583,
+                "df": 2,
+                "js": 0.4872,
+                "observed": {
+                  "paper": 2,
+                  "scissors": 19,
+                  "rock": 3
+                },
+                "reference": {
+                  "paper": 84,
+                  "scissors": 16
+                }
+              },
+              {
+                "id": "shape",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 44.933,
+                "df": 2,
+                "js": 0.5284,
+                "observed": {
+                  "hexagon": 21,
+                  "circle": 3
+                },
+                "reference": {
+                  "triangle": 71,
+                  "hexagon": 29
+                }
+              },
+              {
+                "id": "planet",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000049999750001249995,
+                "method": "mc-floor",
+                "reps": 200000,
+                "chi2": 55.455,
+                "df": 3,
+                "js": 0.6155,
+                "observed": {
+                  "mars": 21,
+                  "earth": 3
+                },
+                "reference": {
+                  "saturn": 76,
+                  "neptune": 3,
+                  "mars": 21
+                }
+              },
+              {
+                "id": "dessert",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.3508771929824561,
+                "method": "monte-carlo",
+                "reps": 114,
+                "chi2": 1.196,
+                "df": 1,
+                "js": 0.0077,
+                "observed": {
+                  "brownie": 23,
+                  "cookie": "[REDACTED]"
+                },
+                "reference": {
+                  "brownie": 99,
+                  "cookie": "[REDACTED]"
+                }
+              },
+              {
+                "id": "suit",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0299625468164794,
+                "method": "monte-carlo",
+                "reps": 1335,
+                "chi2": 5.45,
+                "df": 1,
+                "js": 0.0538,
+                "observed": {
+                  "hearts": 17,
+                  "spades": 7
+                },
+                "reference": {
+                  "spades": 56,
+                  "hearts": 44
+                }
+              },
+              {
+                "id": "digit_not7",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0000609979260705136,
+                "method": "monte-carlo",
+                "reps": 24590,
+                "chi2": 19.433,
+                "df": 1,
+                "js": 0.2264,
+                "observed": {
+                  "3": 2,
+                  "4": 22
+                },
+                "reference": {
+                  "3": 59,
+                  "4": 41
+                }
+              },
+              {
+                "id": "season",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.18518518518518517,
+                "method": "monte-carlo",
+                "reps": 216,
+                "chi2": 4.106,
+                "df": 1,
+                "js": 0.0212,
+                "observed": {
+                  "autumn": 23,
+                  "spring": 1
+                },
+                "reference": {
+                  "autumn": 100
+                }
+              },
+              {
+                "id": "animal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.046296296296296294,
+                "method": "monte-carlo",
+                "reps": 864,
+                "chi2": 7.626,
+                "df": 1,
+                "js": 0.043,
+                "observed": {
+                  "fox": 2,
+                  "owl": 22
+                },
+                "reference": {
+                  "owl": 92
+                }
+              },
+              {
+                "id": "zh_color",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.00017499125043747812,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 19.953,
+                "df": 1,
+                "js": 0.1258,
+                "observed": {
+                  "蓝": 15,
+                  "绿": 9
+                },
+                "reference": {
+                  "蓝": 95,
+                  "绿": 5
+                }
+              },
+              {
+                "id": "card_rank",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.004224757076468103,
+                "method": "monte-carlo",
+                "reps": 9468,
+                "chi2": 15.443,
+                "df": 4,
+                "js": 0.258,
+                "observed": {
+                  "7": 24
+                },
+                "reference": {
+                  "7": 57,
+                  "8": 8,
+                  "9": 5,
+                  "q": 26,
+                  "k": 4
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "identity.self_report",
+          "status": "info",
+          "title": {
+            "zh": "自报身份",
+            "en": "Self-reported identity"
+          },
+          "detail": {
+            "zh": "自称「OpenAI o3-mini」（自报不可靠，不参与判定）",
+            "en": "answered \"OpenAI o3-mini\" (self-reports are unreliable; not used for the verdict)"
+          },
+          "evidence": {
+            "answer": "OpenAI o3-mini",
+            "foreignFamilies": []
+          }
+        },
+        {
+          "id": "identity.cutoff",
+          "status": "info",
+          "title": {
+            "zh": "知识截止",
+            "en": "Knowledge cutoff"
+          },
+          "detail": {
+            "zh": "自称知识截止：December 2025",
+            "en": "claims knowledge cutoff: December 2025"
+          },
+          "evidence": {
+            "answer": "December 2025"
+          }
+        },
+        {
+          "id": "identity.tokenizer",
+          "status": "info",
+          "title": {
+            "zh": "分词器长度特征",
+            "en": "Tokenizer length signature"
+          },
+          "detail": {
+            "zh": "固定文本计 74 input token，与 gpt-5.3-codex 官方计数一致",
+            "en": "fixed text billed as 74 input tokens, same as the official gpt-5.3-codex count"
+          },
+          "evidence": {
+            "inputTokens": 74,
+            "referenceInputTokens": 74,
+            "chars": 146,
+            "charsPerToken": 1.97,
+            "localEstimate": 47,
+            "matchesReference": true
+          }
+        }
+      ],
+      "meta": {
+        "pValue": 0.0000040957359243587455,
+        "calibrated": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+CONSISTENT: behaves like gpt-6-astra (p=0.428)
+target: http://127.0.0.1:18984/v1  model: gpt-6-astra  api: responses  reference: gpt-6-astra  endpoint p-value: 0.428  took: 213.2s  used: 579 req, 18260 in / 3177 out tokens
+
+✔ IDENTITY  identity consistent
+   ✔ Statistical fingerprint: p=0.428: consistent with the gpt-6-astra reference (24 probes × 24 samples, mean JS=0.010)
+   ✔ Self-reported identity: answered "ChatGPT", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: December 2025
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-astra count

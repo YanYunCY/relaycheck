@@ -1,0 +1,259 @@
+{
+  "model": "gpt-6-astra",
+  "api": "responses",
+  "created": "2026-10-31T13:49:46.065Z",
+  "samples": 100,
+  "probeSetVersion": 2,
+  "sampling": {
+    "api": "responses",
+    "temperature": 1,
+    "maxTokens": 16,
+    "reasoningEffort": "low"
+  },
+  "probes": [
+    {
+      "id": "letter10",
+      "prompt": "Pick one letter: A, B, C, D, E, F, G, H, I, J. Reply with only your choice, nothing else.",
+      "dist": {
+        "g": 96,
+        "f": 4
+      }
+    },
+    {
+      "id": "zh_animal",
+      "prompt": "从下面的动物中随机选一个：猫、狗、兔、马、熊、鹰。只回答一个字。",
+      "dist": {
+        "鹰": 72,
+        "兔": 28
+      }
+    },
+    {
+      "id": "continent",
+      "prompt": "Pick one continent: Africa, Antarctica, Asia, Australia, Europe, North America, South America. Reply with only your choice, nothing else.",
+      "dist": {
+        "africa": 100
+      }
+    },
+    {
+      "id": "catname",
+      "prompt": "Pick a name for a kitten: Luna, Milo, Oliver, Leo, Bella, Max. Reply with only your choice, nothing else.",
+      "dist": {
+        "milo": 78,
+        "luna": 22
+      }
+    },
+    {
+      "id": "month",
+      "prompt": "Pick a random month of the year. Reply with only your choice, nothing else.",
+      "dist": {
+        "october": 58,
+        "september": 42
+      }
+    },
+    {
+      "id": "metal",
+      "prompt": "Pick one metal: gold, silver, copper, iron, tin, platinum. Reply with only your choice, nothing else.",
+      "dist": {
+        "copper": 100
+      }
+    },
+    {
+      "id": "coin3",
+      "prompt": "Flip a fair coin three times. Reply with only the sequence using H and T, like HTH, nothing else.",
+      "dist": {
+        "thh": 100
+      }
+    },
+    {
+      "id": "flower",
+      "prompt": "Pick one flower: rose, tulip, daisy, lily, sunflower, orchid. Reply with only your choice, nothing else.",
+      "dist": {
+        "tulip": 28,
+        "sunflower": 62,
+        "daisy": 10
+      }
+    },
+    {
+      "id": "sport",
+      "prompt": "Pick one sport: soccer, tennis, basketball, golf, swimming, cycling. Reply with only your choice, nothing else.",
+      "dist": {
+        "tennis": 100
+      }
+    },
+    {
+      "id": "daytime",
+      "prompt": "Pick one time of day: morning, afternoon, evening, night. Reply with only your choice, nothing else.",
+      "dist": {
+        "evening": 94,
+        "morning": 6
+      }
+    },
+    {
+      "id": "one_to_20",
+      "prompt": "Pick a random whole number from 1 to 20. Reply with only your choice, nothing else.",
+      "dist": {
+        "7": 3,
+        "13": 37,
+        "14": 42,
+        "17": 18
+      }
+    },
+    {
+      "id": "weekday",
+      "prompt": "Pick a day of the week: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Reply with only your choice, nothing else.",
+      "dist": {
+        "thursday": 100
+      }
+    },
+    {
+      "id": "animal_rev",
+      "prompt": "Choose one animal: bear, fox, owl, dog, cat. Reply with only your choice, nothing else.",
+      "dist": {
+        "fox": 100
+      }
+    },
+    {
+      "id": "tree",
+      "prompt": "Pick one tree: oak, pine, maple, birch, willow, cedar. Reply with only your choice, nothing else.",
+      "dist": {
+        "maple": 100
+      }
+    },
+    {
+      "id": "rps",
+      "prompt": "Play one round of rock paper scissors. Choose one: rock, paper, scissors. Reply with only your choice, nothing else.",
+      "dist": {
+        "paper": 81,
+        "scissors": 18,
+        "rock": 1
+      }
+    },
+    {
+      "id": "shape",
+      "prompt": "Pick one shape: circle, square, triangle, hexagon, star. Reply with only your choice, nothing else.",
+      "dist": {
+        "hexagon": 100
+      }
+    },
+    {
+      "id": "planet",
+      "prompt": "Pick one planet: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune. Reply with only your choice, nothing else.",
+      "dist": {
+        "saturn": 100
+      }
+    },
+    {
+      "id": "dessert",
+      "prompt": "Pick one dessert: cake, pie, cookie, pudding, brownie, donut. Reply with only your choice, nothing else.",
+      "dist": {
+        "brownie": 100
+      }
+    },
+    {
+      "id": "suit",
+      "prompt": "Pick one card suit: hearts, diamonds, clubs, spades. Reply with only your choice, nothing else.",
+      "dist": {
+        "clubs": 92,
+        "spades": 8
+      }
+    },
+    {
+      "id": "digit_not7",
+      "prompt": "Pick a random digit from 0 to 9, but not 7. Reply with only your choice, nothing else.",
+      "dist": {
+        "3": 2,
+        "4": 98
+      }
+    },
+    {
+      "id": "season",
+      "prompt": "Pick one season: spring, summer, autumn, winter. Reply with only your choice, nothing else.",
+      "dist": {
+        "autumn": 100
+      }
+    },
+    {
+      "id": "animal",
+      "prompt": "Choose one animal: cat, dog, owl, fox, bear. Reply with only your choice, nothing else.",
+      "dist": {
+        "fox": 46,
+        "owl": 54
+      }
+    },
+    {
+      "id": "zh_color",
+      "prompt": "从下面的颜色中随机选一个：红、橙、黄、绿、蓝、紫。只回答一个字。",
+      "dist": {
+        "蓝": 82,
+        "绿": 17,
+        "紫": 1
+      }
+    },
+    {
+      "id": "card_rank",
+      "prompt": "Draw one card from a shuffled standard deck. Reply with only its rank (A, 2-10, J, Q or K), nothing else.",
+      "dist": {
+        "7": 98,
+        "8": 2
+      }
+    }
+  ],
+  "dispersion": {
+    "phi": 0.73,
+    "df": 54,
+    "blocks": 4,
+    "source": "fingerprint time blocks"
+  },
+  "billing": {
+    "responses": {
+      "prompts": [
+        {
+          "id": "b1",
+          "hash": "70646876",
+          "inputTokens": 80
+        },
+        {
+          "id": "b4",
+          "hash": "3333af05",
+          "inputTokens": 257
+        },
+        {
+          "id": "b12",
+          "hash": "7fdb131d",
+          "inputTokens": 729
+        },
+        {
+          "id": "tokenizer",
+          "hash": "ee7fadea",
+          "inputTokens": 74
+        }
+      ],
+      "measuredAt": "2026-10-31T14:04:28.087Z"
+    },
+    "openai": {
+      "prompts": [
+        {
+          "id": "b1",
+          "hash": "70646876",
+          "inputTokens": 80
+        },
+        {
+          "id": "b4",
+          "hash": "3333af05",
+          "inputTokens": 257
+        },
+        {
+          "id": "b12",
+          "hash": "7fdb131d",
+          "inputTokens": 729
+        },
+        {
+          "id": "tokenizer",
+          "hash": "ee7fadea",
+          "inputTokens": 74
+        }
+      ],
+      "measuredAt": "2026-10-31T14:04:39.051Z"
+    }
+  }
+}

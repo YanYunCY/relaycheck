@@ -1,0 +1,8 @@
+INCONCLUSIVE: identity (identity uncertain)
+target: http://127.0.0.1:18984/v1  model: gpt-6-astra  api: responses  reference: gpt-6-astra  endpoint p-value: 0.247  took: 331.8s  used: 420 req, 13308 in / 2310 out tokens
+
+▲ IDENTITY  identity uncertain
+   ▲ Statistical fingerprint: p=0.247, but 27% of sample requests failed; not reliable
+   ▲ Self-reported identity: request failed, cannot judge: request to /v1/responses failed after 4 attempts: fetch failed (ECONNREFUSED)
+   ▲ Knowledge cutoff: request failed, cannot judge: request to /v1/responses failed after 4 attempts: fetch failed (ECONNREFUSED)
+   ▲ Tokenizer length signature: request failed, cannot judge: request to /v1/responses failed after 4 attempts: fetch failed (ECONNREFUSED)

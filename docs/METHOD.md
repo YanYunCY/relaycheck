@@ -229,6 +229,7 @@ Official gpt-6-luna recalled all needles at 2k, 32k and 100k (billed 2,181, 33,4
 - **Billing.** The exact baseline catches a constant hidden prompt down to a few tokens, but only for prompts that match the reference, model and protocol. A relay can inject only into longer or tool-carrying requests, or bill honestly while doing something else. Cache checks depend on the upstream's best-effort caching.
 - **Context.** Three needles at 32k/100k cannot locate an exact window, and a relay could truncate only above 100k.
 - Self-reports, knowledge cutoffs and the `model` field are trivially forged and are never used as proof.
+- **Sibling models with near-identical sampling behaviour.** On 2026-10-31, gpt-6.1-sol served as gpt-6-astra passed (p = 0.024). The two references differ by mean JS 0.017 (honest-vs-honest noise is 0.01 to 0.025); even 100 vs 100 samples give only p ≈ 3·10⁻⁴ before the dispersion correction. Pairwise reference distances: `npx vite-node scripts/compare-refs.ts refs/*.json`. Telling such pairs apart needs a different signal (capability or latency probes), which relaycheck does not have yet.
 
 ## Reproduce
 
