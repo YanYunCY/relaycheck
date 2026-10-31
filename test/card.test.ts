@@ -71,6 +71,13 @@ function boxes(svg: string): Box[] {
       stack.pop();
       continue;
     }
+    if (tag.startsWith('<g') && attr(tag, 'data-role') === 'verdict') {
+      // a word drawn from glyph outlines: its em size and unrotated extent are on the group
+      const left = Number(attr(tag, 'data-x')) + stack.reduce((a, g) => a + g.dx, 0);
+      out.push({ text: unesc(attr(tag, 'data-word')!), size: Number(attr(tag, 'data-size')), left, right: left + Number(attr(tag, 'data-w')), group: -1 });
+      stack.push({ dx: 0, id: -1, mono: false });
+      continue;
+    }
     if (tag.startsWith('<g')) {
       const t = /translate\(([-\d.]+)[ ,]+([-\d.]+)\)/.exec(attr(tag, 'transform') ?? '');
       stack.push({ dx: t ? Number(t[1]) : 0, id: t ? ++gid : -1, mono: (attr(tag, 'font-family') ?? '').startsWith("'JetBrains Mono'") });
@@ -172,9 +179,17 @@ describe('share card', () => {
     // in every chip the group name ends before the status word starts
     const chips = new Map<number, Box[]>();
     for (const b of bs) if (b.group > 0) chips.set(b.group, [...(chips.get(b.group) ?? []), b]);
-    const rows = [...chips.values()].filter((c) => c.length === 2);
-    expect(rows.length).toBeGreaterThanOrEqual(4);
-    for (const [name, word] of rows) expect(name.right, name.text).toBeLessThanOrEqual(word.left);
+    if (style === 'slip') {
+      // paper-form checkboxes: name only, each inside its quarter of the main column
+      const names = [...chips.values()].filter((c) => c.length === 1).map((c) => c[0]).filter((b) => b.size === 19);
+      expect(names.length).toBe(4);
+      names.sort((a, b) => a.left - b.left);
+      for (let i = 1; i < names.length; i++) expect(names[i - 1].right, names[i - 1].text).toBeLessThanOrEqual(names[i].left - 30);
+    } else {
+      const rows = [...chips.values()].filter((c) => c.length === 2);
+      expect(rows.length).toBeGreaterThanOrEqual(4);
+      for (const [name, word] of rows) expect(name.right, name.text).toBeLessThanOrEqual(word.left);
+    }
   });
 
   it('the verdict is the dominant element: ≥ 2× any other text, and larger than the decisive number', () => {
@@ -231,10 +246,41 @@ describe('share card', () => {
       const fills = (['consistent', 'inconsistent', 'inconclusive'] as const).map((verdict) => {
         const svg = renderCard(report({ verdict }), { style });
         const word = verdict === 'consistent' ? '一致' : verdict === 'inconsistent' ? '不一致' : '存疑';
-        const m = style === 'stamp' ? /<rect width="(?!1200")\d+" height="630" fill="(#[0-9a-f]{6})"/.exec(svg) : new RegExp(`fill="(#[0-9a-f]{6})"[^>]*>${word}</text>`).exec(svg);
+        const m =
+          style === 'stamp'
+            ? /<rect width="(?!1200")\d+" height="630" fill="(#[0-9a-f]{6})"/.exec(svg)
+            : style === 'ink'
+              ? new RegExp(`fill="(#[0-9a-f]{6})"[^>]*>${word}</text>`).exec(svg)
+              : new RegExp(`data-role="verdict" data-word="${word}"[^>]*data-color="(#[0-9a-f]{6})"`).exec(svg);
         return m?.[1];
       });
       expect(new Set(fills).size, style).toBe(3);
+    }
+  });
+
+  it('draws the verdict from embedded outlines in the round-2 styles (no font dependency)', () => {
+    for (const style of ['slip', 'lab', 'night'] as CardStyle[])
+      for (const lang of ['zh', 'en'] as Lang[]) {
+        const svg = renderCard(report(), { style, lang });
+        const g = new RegExp(`<g [^>]*data-role="verdict" data-word="${lang === 'zh' ? '不一致' : 'INCONSISTENT'}"[^>]*>(.*?)</g>`).exec(svg);
+        expect(g, `${style}/${lang}`).toBeTruthy();
+        expect(g![1]).toMatch(/^(<path [^>]*d="M[^"]+"\/>)+$/);
+        expect(svg).not.toMatch(/<image|href="http|@import|url\(http/);
+      }
+    expect(DEFAULT_CARD_STYLE).toBe('slip');
+  });
+
+  it('round-2 styles render every verdict and decisive-number kind', () => {
+    const swap = report({ injectedTokens: null, pValue: 8.3e-6, groups: report().groups.map((g) => ({ ...g, status: g.id === 'identity' ? 'fail' : 'pass' })) });
+    for (const style of ['slip', 'lab', 'night'] as CardStyle[]) {
+      expect(renderCard(swap, { style })).toContain('data-role="meter"');
+      expect(renderCard(report(), { style })).toContain('+512');
+      for (const verdict of ['consistent', 'inconsistent', 'inconclusive'] as const) {
+        const svg = renderCard(report({ verdict }), { style, lang: 'en' });
+        expect(svg).toMatch(/<\/svg>\s*$/);
+        expect(svg).not.toContain('NaN');
+        expect(svg).not.toContain('undefined');
+      }
     }
   });
 
@@ -244,6 +290,7 @@ describe('share card', () => {
     expect(svg).toContain('&lt;script&gt;');
     expect(cardStyleOf('ink')).toBe('ink');
     expect(cardStyleOf('B')).toBe('stamp');
+    for (const s of ['slip', 'lab', 'night'] as const) expect(cardStyleOf(s.toUpperCase())).toBe(s);
     expect(cardStyleOf(undefined)).toBe(DEFAULT_CARD_STYLE);
     expect(cardStyleOf('neon')).toBe(DEFAULT_CARD_STYLE);
   });

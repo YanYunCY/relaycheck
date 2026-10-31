@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" font-family="Inter, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', sans-serif">
+<title>relaycheck: Is your relay serving the real model? 你的中转站是真模型吗？</title>
+<rect width="1280" height="640" fill="#0a0d12"/>
+<defs>
+<radialGradient id="g1" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#3fdc7a" stop-opacity="0.30"/><stop offset="0.6" stop-color="#3fdc7a" stop-opacity="0.05"/><stop offset="1" stop-color="#3fdc7a" stop-opacity="0"/></radialGradient>
+<radialGradient id="g2" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#58a6ff" stop-opacity="0.18"/><stop offset="1" stop-color="#58a6ff" stop-opacity="0"/></radialGradient>
+<linearGradient id="word" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#ffffff"/><stop offset="1" stop-color="#9fb0c2"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#161b22" stop-opacity="0.92"/><stop offset="1" stop-color="#0d1117" stop-opacity="0.92"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.22"/><stop offset="1" stop-color="#fff" stop-opacity="0.04"/></linearGradient>
+<filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+<filter id="shadow" x="-10%" y="-10%" width="120%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="24"/><feOffset dy="18"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" seed="4" stitchTiles="stitch" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.120 0 0 0 -0.045"/>
+</filter></defs>
+<ellipse cx="1010" cy="330" rx="420" ry="300" fill="url(#g1)"/><ellipse cx="260" cy="120" rx="420" ry="260" fill="url(#g2)"/>
+<path d="M0 80.5H1280M0 560.5H1280M80.5 0V640M1200.5 0V640" stroke="#fff" stroke-opacity="0.08"/>
+<path d="M72.5 80.5H88.5M80.5 72.5V88.5" stroke="#eef2f6" stroke-opacity="0.55"/>
+<path d="M1192.5 80.5H1208.5M1200.5 72.5V88.5" stroke="#eef2f6" stroke-opacity="0.55"/>
+<path d="M72.5 560.5H88.5M80.5 552.5V568.5" stroke="#eef2f6" stroke-opacity="0.55"/>
+<path d="M1192.5 560.5H1208.5M1200.5 552.5V568.5" stroke="#eef2f6" stroke-opacity="0.55"/>
+<text x="80" y="56" font-size="15" fill="#8b949e" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace">relaycheck · 验货</text>
+<text x="1200" y="56" font-size="15" fill="#8b949e" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace" text-anchor="end">open source · MIT · zero deps</text>
+<text x="80" y="604" font-size="15" fill="#5b6470" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace">github.com/YanYunCY/relaycheck</text>
+<text x="1200" y="604" font-size="15" fill="#5b6470" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace" text-anchor="end">identity · protocol · billing · context</text>
+<text x="122" y="262" font-size="112" font-weight="800" fill="url(#word)" letter-spacing="-4.5" font-family="'Inter Display', Inter, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', sans-serif">relaycheck</text>
+<text x="128" y="330" font-size="32" font-weight="600" fill="#eef2f6" letter-spacing="-0.3">Is your relay serving the real model?</text>
+<text x="128" y="378" font-size="26" fill="#8b949e">你的中转站是真模型吗？</text>
+<g transform="translate(128 426)"><rect width="392" height="58" rx="10" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.14"/><text x="22" y="37" font-size="22" fill="#eef2f6" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace"><tspan fill="#3fdc7a">$</tspan> npx relaycheck &lt;url&gt;</text></g>
+<g transform="translate(772 150)" filter="url(#shadow)"><rect width="400" height="330" rx="14" fill="url(#panel)"/><rect x=".5" y=".5" width="399" height="329" rx="14" fill="none" stroke="url(#edge)"/>
+<circle cx="24" cy="24" r="5.5" fill="#ff5f57" fill-opacity="0.85"/>
+<circle cx="42" cy="24" r="5.5" fill="#febc2e" fill-opacity="0.85"/>
+<circle cx="60" cy="24" r="5.5" fill="#28c840" fill-opacity="0.85"/>
+<rect y="47" width="400" height="1" fill="#fff" fill-opacity="0.08"/>
+<text x="24" y="92" font-size="17" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace"><tspan fill="#3fdc7a">✔</tspan><tspan dx="10" fill="#eef2f6" font-weight="700">IDENTITY</tspan></text><text x="376" y="92" font-size="16" fill="#8b949e" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace" text-anchor="end">p = 0.105</text>
+<text x="24" y="128" font-size="17" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace"><tspan fill="#3fdc7a">✔</tspan><tspan dx="10" fill="#eef2f6" font-weight="700">PROTOCOL</tspan></text><text x="376" y="128" font-size="16" fill="#8b949e" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace" text-anchor="end">intact</text>
+<text x="24" y="164" font-size="17" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace"><tspan fill="#3fdc7a">✔</tspan><tspan dx="10" fill="#eef2f6" font-weight="700">BILLING</tspan></text><text x="376" y="164" font-size="16" fill="#8b949e" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace" text-anchor="end">+0 tokens</text>
+<text x="24" y="200" font-size="17" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace"><tspan fill="#3fdc7a">✔</tspan><tspan dx="10" fill="#eef2f6" font-weight="700">CONTEXT</tspan></text><text x="376" y="200" font-size="16" fill="#8b949e" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace" text-anchor="end">32k ok</text>
+<rect x="24" y="238" width="352" height="1" fill="#fff" fill-opacity="0.08"/>
+<circle cx="34" cy="281" r="12" fill="#3fdc7a" fill-opacity="0.4" filter="url(#soft)"/><circle cx="34" cy="281" r="6" fill="#3fdc7a"/>
+<g fill="#3fdc7a"><path transform="translate(56.0 262.0) scale(0.0400)" d="M38 425V556H964V425Z"/><path transform="translate(98.0 262.0) scale(0.0400)" d="M74 461C102 450 144 444 387 423L403 460L455 433C446 447 436 459 426 471C453 492 497 540 516 563C533 542 549 518 564 493C586 572 613 644 647 708C608 759 559 802 499 836L494 740L330 763V660H481V552H330V461H210V552H58V660H210V779L27 801L44 923C155 907 303 885 447 863H446C469 888 504 943 515 971C597 929 664 878 717 815C766 877 826 928 900 966C917 934 954 887 980 864C902 829 840 776 790 710C847 606 883 478 904 324H961V213H681C696 160 709 105 719 49L600 28C577 160 540 286 486 384C461 333 420 266 388 214L298 256L337 326L192 335C222 292 251 243 276 194H496V85H37V194H145C121 248 94 294 83 310C68 333 52 349 36 354C49 384 68 438 74 461ZM644 324H782C769 425 748 512 716 587C682 513 656 430 638 340Z"/></g>
+<text x="152" y="292" font-size="18" fill="#3fdc7a" font-weight="700" letter-spacing="3" font-family="'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', monospace">CONSISTENT</text>
+</g>
+<rect width="1280" height="640" fill="#fff" filter="url(#grain)"/>
+</svg>

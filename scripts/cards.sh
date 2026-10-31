@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Regenerate the example share cards and social preview from local mock relays (no real API, no real key).
 # Needs rsvg-convert (librsvg2-bin), a CJK font (fonts-noto-cjk), Inter and JetBrains Mono to rasterise the SVGs.
-#   docs/card-{pass,fail}.png        default card style (Chinese primary)
-#   docs/design/card-{A,B}-*.png     both design directions (A = ink, B = stamp), plus -400 thumbnails
-#   docs/social-preview.png          from docs/social-preview.svg (direction B; A kept in docs/design)
+#   docs/card-{pass,fail}.png              default card style (slip, Chinese primary)
+#   docs/design/round2/card-<name>-*.png   round-2 directions: slip (default), lab, night
+#   docs/design/round2/social-<name>.*     round-2 social directions (scripts/gen-social.py)
+#   docs/design/card-{A,B}-*.png           round-1 directions (A = ink, B = stamp)
+#   docs/social-preview.{svg,png}          = round2/social-slip.svg
 set -euo pipefail
 cd "$(dirname "$0")/.."
 npm run build >/dev/null
@@ -23,6 +25,18 @@ card "" honest 8797 card-pass
 card "" swap 8798 card-fail
 rsvg-convert -w 1200 -h 630 out/card-pass.svg -o docs/card-pass.png
 rsvg-convert -w 1200 -h 630 out/card-fail.svg -o docs/card-fail.png
+mkdir -p docs/design/round2
+for s in slip lab night; do
+  card "$s" honest 8797 "card-$s-pass"
+  card "$s" swap 8798 "card-$s-fail"
+  for v in pass fail; do
+    rsvg-convert -w 1200 -h 630 "out/card-$s-$v.svg" -o "docs/design/round2/card-$s-$v.png"
+    rsvg-convert -w 400 "out/card-$s-$v.svg" -o "out/card-$s-$v-400.png"
+  done
+done
+python3 scripts/gen-social.py >/dev/null
+cp docs/design/round2/social-slip.svg docs/social-preview.svg
+for s in slip lab night; do rsvg-convert -w 1280 -h 640 "docs/design/round2/social-$s.svg" -o "docs/design/round2/social-$s.png"; done
 for d in A:ink B:stamp; do
   n=${d%%:*}; s=${d#*:}
   card "$s" honest 8797 "card-$n-pass"
