@@ -8,7 +8,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-<!-- demo.gif 放这里 -->
+<img src="docs/demo.zh-CN.gif" alt="relaycheck 演示：诚实的模拟中转通过；换模型的中转 p=8.3e-6 判为不一致；偷加 token 的中转被抓到每请求多计 512 token" width="900">
 
 </div>
 
@@ -42,7 +42,9 @@ npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --lang zh --c
 
 - 终端一行结论 + 分组证据（`--lang zh|en`）
 - `--json` 给 CI 用，`--html` 生成完整报告
-- `--card` 生成 1200×630 分享卡，默认隐藏中转域名（`--show-host` 显示）
+- `--card` 生成 1200×630 中英双语分享卡（SVG），默认隐藏中转域名（`--show-host` 显示）。要 PNG：`rsvg-convert card.svg -o card.png`，或用浏览器打开 SVG 截图；relaycheck 保持零依赖，不内置栅格化。
+
+<p align="center"><img src="docs/card-pass.png" alt="分享卡：一致" width="440"> <img src="docs/card-fail.png" alt="分享卡：不一致" width="440"></p>
 
 退出码：`0` 一致 · `1` 不一致 · `2` 存疑 · `3` 运行错误。放进 CI，就能定时盯住团队在用的中转。
 

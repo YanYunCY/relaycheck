@@ -14,12 +14,15 @@
 
 录制源：`scripts/demo.sh`（mock honest / swap），不出现任何真实中转站名字。另出一张静态报告卡图做 README 首图和社交卡。
 
+已产出：`docs/demo.gif` / `docs/demo.zh-CN.gif`（`vhs docs/demo.tape`、`vhs docs/demo.zh-CN.tape` 复现，1000×720、约 21 秒，mock honest / swap / inject），`docs/card-pass.png` / `docs/card-fail.png`（`bash scripts/cards.sh`），`docs/social-preview.png`（1280×640，源文件 `docs/social-preview.svg`，在 GitHub 仓库 Settings → Social preview 上传）。
+
 ## B. 发布计划
 
 ### 发布前（T-7 到 T-1）
 - [ ] 用官方 API 生成 4 个真实参考指纹（等 Ted 批预算）。
 - [ ] 找 5–10 位 V2EX / 群友内测真实中转，收集误报；目标同模型对照误报率 ≤ 1%。
-- [ ] README 双语、动图、报告卡图、FAQ（为什么可信、误报怎么办、为什么不做红黑榜）。
+- [x] README 双语、动图、报告卡图（FAQ 待补）
+- [ ] FAQ（为什么可信、误报怎么办、为什么不做红黑榜）。
 - [ ] 预写好各平台文案；GitHub topics：llm, claude, codex, api-relay, model-fingerprinting, claude-code。
 - [ ] 经 Ted 同意后建仓 YanYunCY/relaycheck，发 npm v0.1.0。
 

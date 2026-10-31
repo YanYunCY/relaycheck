@@ -8,7 +8,7 @@ Statistically test whether an LLM API relay, proxy or gateway serves the model i
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-<!-- demo.gif goes here -->
+<img src="docs/demo.gif" alt="relaycheck demo: an honest mock relay passes, a model-swapping relay fails with p=8.3e-6, a token-injecting relay is caught at +512 tokens per request" width="900">
 
 </div>
 
@@ -42,7 +42,9 @@ Speaks Anthropic Messages, OpenAI Chat Completions and OpenAI Responses (`--api 
 
 - A one-line verdict plus per-group evidence in your terminal (`--lang en|zh`)
 - `--json` for CI, `--html` for a full report
-- `--card` renders a 1200×630 share card. The relay host is hidden by default (`--show-host` to show it)
+- `--card` renders a 1200×630 bilingual share card (SVG). The relay host is hidden by default (`--show-host` to show it). Need a PNG? `rsvg-convert card.svg -o card.png`, or open the SVG in a browser and screenshot it; relaycheck stays dependency-free, so it doesn't rasterise itself.
+
+<p align="center"><img src="docs/card-pass.png" alt="share card: CONSISTENT" width="440"> <img src="docs/card-fail.png" alt="share card: INCONSISTENT" width="440"></p>
 
 Exit codes: `0` consistent · `1` inconsistent · `2` inconclusive · `3` error. Drop it in CI to watch the relay your team depends on.
 
