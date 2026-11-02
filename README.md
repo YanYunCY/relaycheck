@@ -10,6 +10,8 @@ Statistically test whether an LLM API relay, proxy or gateway serves the model i
 
 <img src="docs/demo.gif" alt="relaycheck demo: an honest mock relay passes, a model-swapping relay fails with p=8.3e-6, a token-injecting relay is caught at +512 tokens per request" width="900">
 
+<sub>The GIF uses local mock relays (<code>scripts/demo-setup.sh</code>), so it runs without a key. Real runs are below.</sub>
+
 </div>
 
 ```bash
@@ -17,11 +19,12 @@ export RELAY_KEY=sk-...    # read only from an env var, never from argv
 npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --card card.svg
 ```
 
-```
-✗ INCONSISTENT  p = 0.0003  — answers don't match claude-sonnet-4-5's fingerprint
-                 +512 hidden input tokens billed per request
-  identity  FAIL   protocol  PASS   billing  FAIL   context  PASS
-```
+**Real runs (2026-10-31, unedited output):** the official OpenAI API passes; a local proxy that takes `gpt-6.1-sol` requests, serves `gpt-6.1-terra` and rewrites the model name back is caught at p = 1.6·10⁻¹⁴.
+
+<img src="docs/real-run-official.png" alt="real run against the official OpenAI API: CONSISTENT, p=0.722, all four groups pass" width="900">
+<img src="docs/real-run-swap.png" alt="real run against a swapping proxy: INCONSISTENT, p=1.6e-14, likely model swap" width="900">
+
+<sub>Rendered from captured stdout (<code>calib/e2e/official-full.txt</code>, <code>calib/val/sol-swap-terra-1.txt</code>) by <code>scripts/real-run-shot.py</code>; the swap proxy is <code>scripts/dishonest-proxy.mjs</code>.</sub>
 
 ## Why
 

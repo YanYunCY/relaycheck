@@ -10,6 +10,8 @@
 
 <img src="docs/demo.zh-CN.gif" alt="relaycheck 演示：诚实的模拟中转通过；换模型的中转 p=8.3e-6 判为不一致；偷加 token 的中转被抓到每请求多计 512 token" width="900">
 
+<sub>动图用的是本地模拟中转（<code>scripts/demo-setup.sh</code>），不需要 key。真实运行截图见下。</sub>
+
 </div>
 
 ```bash
@@ -17,11 +19,12 @@ export RELAY_KEY=sk-...    # 只从环境变量读取，不接受命令行明文
 npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --lang zh --card card.svg
 ```
 
-```
-✗ 不一致  p = 0.0003 —— 回答分布与 claude-sonnet-4-5 指纹不符
-          每次请求多计 512 个输入 token
-  身份 FAIL   协议 PASS   计费 FAIL   上下文 PASS
-```
+**真实运行（2026-10-31，输出未改动）：** 官方 OpenAI API 判为一致；一个本地代理收到 `gpt-6.1-sol` 请求，实际转给 `gpt-6.1-terra`，并把返回里的模型名改回去，被抓到 p = 1.6·10⁻¹⁴。
+
+<img src="docs/real-run-official.png" alt="对官方 OpenAI API 的真实运行：一致，p=0.722，四组检查全部通过" width="900">
+<img src="docs/real-run-swap.png" alt="对偷换模型代理的真实运行：不一致，p=1.6e-14，疑似换模型" width="900">
+
+<sub>由真实运行的终端输出（<code>calib/e2e/official-full.txt</code>、<code>calib/val/sol-swap-terra-1.txt</code>）经 <code>scripts/real-run-shot.py</code> 渲染；换模型代理见 <code>scripts/dishonest-proxy.mjs</code>。</sub>
 
 ## 为什么做这个
 
