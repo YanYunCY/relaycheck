@@ -15,9 +15,10 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
+      # npm trusted publishing (OIDC) needs npm >= 11.5.1
+      - run: npm install -g npm@latest
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm test
+      # No token: npm authenticates this workflow via OIDC (trusted publisher on npmjs.com)
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
