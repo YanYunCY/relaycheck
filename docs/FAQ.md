@@ -19,4 +19,10 @@ By default about 600 very short requests plus a few context requests: under one 
 A relay that serves the genuine model most of the time (80 % genuine is flagged only 7.8 % of the time at 24 samples); a relay that recognises the fixed probes and routes only those to the real model; near-identical variants of the same model. See the limitations in [METHOD.md](METHOD.md).
 
 **Which models and protocols?**
-Anthropic Messages, OpenAI Chat Completions and OpenAI Responses. Identity testing needs a reference fingerprint for the model; gpt-6-luna ships built in. Generate others with an official key (`relaycheck fingerprint`) and send a PR to `refs/`.
+Anthropic Messages, OpenAI Chat Completions and OpenAI Responses. Identity testing needs a reference fingerprint for the model. Built in: gpt-6-luna, gpt-6.1-sol, gpt-6.1-terra, gpt-6-astra and gpt-5.3-codex. No Claude reference yet; without one, identity is inconclusive and the other groups still run. Generate others with an official key (`relaycheck fingerprint`) and send a PR to `refs/`. When a reference is found, relaycheck samples the way it was made: the reference's reasoning effort and, with `--api auto`, its protocol first.
+
+**What if the relay overrides temperature or adds its own system prompt?**
+Then the answer distribution changes and relaycheck can flag the endpoint even if the underlying model is genuine. That is a real difference from the official API (the DFA paper reports the same effect for configuration overrides), but it is not proof of a model swap. A hidden system prompt usually also shows up in billing as a constant per-request excess, which tells the two cases apart.
+
+**Why not use logprobs?**
+Most relays don't pass them through, and the ones that do can rewrite them. Sampled answers to finite-choice questions work over any protocol that returns text.

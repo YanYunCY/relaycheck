@@ -2,9 +2,9 @@
 
 # relaycheck
 
-**You paid for Claude. What did your relay actually give you?**
+**You paid for one model. What did your relay actually give you?**
 
-Statistically test whether an LLM API relay, proxy or gateway serves the model it claims, bills the tokens it should, and keeps your context intact. One command. Your key never leaves your machine.
+Statistically test whether an LLM API relay, proxy or gateway serves the model it claims, bills the tokens it should, and keeps your context intact. One command. Your key goes only to the relay you're testing.
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
@@ -16,8 +16,10 @@ Statistically test whether an LLM API relay, proxy or gateway serves the model i
 
 ```bash
 export RELAY_KEY=sk-...    # read only from an env var, never from argv
-npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --card card.svg
+npx relaycheck https://relay.example.com --model gpt-6-luna --card card.svg
 ```
+
+The identity test compares against a **reference fingerprint** of the model. Bundled: `gpt-6-luna`, `gpt-6.1-sol`, `gpt-6.1-terra`, `gpt-6-astra`, `gpt-5.3-codex`. There are **no Claude references yet** (I only have an OpenAI key): for any other model the identity verdict is *inconclusive*, while protocol, billing and context still run. You can [build a reference](#build-your-own-reference) from an official key for about a dollar, and PRs to `refs/` are very welcome. A default check sends about 590 short requests and about 65k input tokens (plus 100k with `--deep`), and takes a few minutes.
 
 **Real runs (2026-10-31, unedited output):** the official OpenAI API passes; a local proxy that takes `gpt-6.1-sol` requests, serves `gpt-6.1-terra` and rewrites the model name back is caught at p = 1.6·10⁻¹⁴.
 
@@ -28,7 +30,7 @@ npx relaycheck https://relay.example.com --model claude-sonnet-4-5 --card card.s
 
 ## Why
 
-Third-party relays are everywhere, especially for Claude Code and Codex users who can't reach official APIs directly. Some quietly swap in a cheaper model, inject hidden system prompts you pay for, or truncate long context. A 2026 shadow-API study found **45.8% of 24 endpoints failed fingerprint verification**. "It feels dumber today" isn't evidence. A p-value is.
+Third-party relays are everywhere, especially for Claude Code and Codex users who can't reach official APIs directly. Some quietly swap in a cheaper model, inject hidden system prompts you pay for, or truncate long context. A 2026 audit of shadow APIs ([arXiv 2603.01919](https://arxiv.org/abs/2603.01919)) found that **11 of 24 endpoints (45.8%) failed fingerprint verification**. "It feels dumber today" isn't evidence. A p-value is.
 
 ## What it checks
 
@@ -36,7 +38,7 @@ Third-party relays are everywhere, especially for Claude Code and Codex users wh
 |---|---|
 | **Identity** | 24 finite-choice probes × N samples at temperature 1 (probe set v2). Each answer distribution is compared to a reference fingerprint with a Monte Carlo permutation χ² test (mid-p, over-dispersion corrected), then merged into one endpoint p-value with the Cauchy combination test. |
 | **Protocol** | The things coding agents depend on: tool-use round trip, SSE event sequence, stop sequences, max_tokens truncation, `model` echo, Anthropic thinking blocks and signatures. |
-| **Billing** | Reported `usage` vs. the **official** token counts stored in the reference (or `count_tokens`; a local estimate is labelled uncalibrated) exposes hidden injected tokens to the token; checks that prompt caching really hits. |
+| **Billing** | Reported `usage` vs. the **official** token counts stored in the reference exposes hidden injected tokens to the token. Without a reference it falls back to the relay's own `count_tokens` (which only catches injection the relay doesn't also count there) or a local estimate (labelled uncalibrated). Also checks that prompt caching really hits. |
 | **Context** | Three needles (10/50/90 % depth) at 2k (control) and 32k tokens; `--deep` adds 100k. Misses are re-tested before calling truncation. |
 
 Speaks Anthropic Messages, OpenAI Chat Completions and OpenAI Responses (`--api auto`).
@@ -68,7 +70,7 @@ We ran relaycheck against the official OpenAI API. All numbers are from [docs/ME
 - **Genuine gpt-6-luna is consistent.** We ran 20 independent identity checks of the official API, 24 samples × 24 probes each (11,520 requests), against `refs/gpt-6-luna.json`. All 20 passed: 0 fail, 0 warn, lowest p = 0.105. A full check with every group and `--deep` 100k gave p = 0.722, with billed input tokens equal to the official count.
 - **Other models claimed as gpt-6-luna are caught.** gpt-5.6-luna (same family) failed 10 of 10 runs (median p = 6.9·10⁻¹⁵), gpt-5-nano failed 5 of 5 (median p = 1.8·10⁻¹⁸) and gpt-5.4-nano failed 5 of 5 (median p = 4.2·10⁻¹⁷).
 - **A real swapped relay.** A local proxy forwarded gpt-5.6-luna upstream and rewrote the `model` field to gpt-6-luna. relaycheck reported `INCONSISTENT p=7.2e-15`, even though protocol, billing and context all looked clean.
-- **More references (2026-10-31).** Real fingerprints for gpt-6.1-sol, gpt-6.1-terra, gpt-6-astra and gpt-5.3-codex. Official self-checks: 7 of 7 consistent (p 0.43 to 0.96). gpt-6-luna served as each of them: 7 of 7 caught (p ≤ 1.2·10⁻⁵). gpt-6.1-terra served as gpt-6.1-sol: caught, p = 1.6·10⁻¹⁴.
+- **More references (2026-10-31).** Real fingerprints for gpt-6.1-sol, gpt-6.1-terra, gpt-6-astra and gpt-5.3-codex. Official self-checks: 7 of 7 consistent (p 0.43 to 0.96; an eighth run was aborted when our local metering proxy crashed, see `calib/val/astra-honest-1.txt`). gpt-6-luna served as each of them: 7 of 7 caught (p ≤ 1.2·10⁻⁵). gpt-6.1-terra served as gpt-6.1-sol: caught, p = 1.6·10⁻¹⁴.
 - **A blind spot we found.** gpt-6.1-sol served as gpt-6-astra **passed** (p = 0.024). Their answer distributions are almost the same (mean JS 0.017, about the noise between two honest runs), and the tokenizer count matches. Sampling probes cannot tell these two apart today; we need a capability-style probe. Help welcome.
 - **Hidden prompt injection.** A proxy that prepended a short hidden system prompt was caught exactly: *+37 input tokens per request*.
 - **Calibration.** In thousands of simulated null runs, the false-alarm rate is at or below the nominal level: 0.05 % at the fail threshold (p < 0.001) and 0.8 % at warn (p < 0.01).
@@ -89,14 +91,14 @@ Your key is read from an environment variable only, sent only to the URL you pas
 
 ## Limits, honestly
 
-Statistical verdicts are evidence, not proof. A relay that is genuine most of the time, or that recognises relaycheck's fixed probes, can pass. Fingerprints drift when vendors update models, so regenerate references from a trusted endpoint. Billing is exact only against a reference baseline or `count_tokens`; otherwise it is labelled uncalibrated. Full method and numbers: [docs/METHOD.md](docs/METHOD.md). relaycheck will never publish a name-and-shame list. You decide what to share.
+Statistical verdicts are evidence, not proof. A relay that is genuine most of the time, or that recognises relaycheck's fixed probes, can pass. Fingerprints drift when vendors update models, so regenerate references from a trusted endpoint. Billing is exact only against a reference baseline; the relay's own `count_tokens` and the local estimate are weaker and labelled as such. Full method and numbers: [docs/METHOD.md](docs/METHOD.md). relaycheck will never publish a name-and-shame list. You decide what to share.
 
-Maintained on a best-effort basis. References are refreshed monthly by CI; fingerprints for other models come from community PRs to `refs/`.
+Maintained on a best-effort basis. References are regenerated by hand for now (a monthly re-fingerprint workflow exists but needs a maintainer key it doesn't have yet); fingerprints for other models come from community PRs to `refs/`.
 
 More questions: [FAQ](docs/FAQ.md).
 
 ## Prior art
 
-Methods build on DFA (arXiv 2610.37086), API-TAIL (arXiv 2610.36801) and KBF (arXiv 2605.29524). Related tools: relay-guard, RelayScope, fpverify, claude-detector.
+Methods build on DFA ([arXiv 2610.37086](https://arxiv.org/abs/2610.37086)), API-TAIL ([arXiv 2610.36801](https://arxiv.org/abs/2610.36801)) and KBF ([arXiv 2605.29524](https://arxiv.org/abs/2605.29524)); the shadow-API audit is [arXiv 2603.01919](https://arxiv.org/abs/2603.01919). Related tools: relay-guard, RelayScope, fpverify, claude-detector.
 
 MIT License

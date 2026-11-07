@@ -102,7 +102,7 @@ In 0.1 the OpenAI side compared billed `usage.input_tokens` with a ~4 chars/toke
   - the same excess on every length (spread ≤ max(3, 2 %)) → a hidden per-request prompt: **fail** at ≥ 16 tokens, **warn** at 4–15;
   - excess that grows with prompt length (slope ≠ 1) → **warn**, different tokenizer, likely a different model family;
   - billed fewer than official → **warn**, prompt rewritten or truncated.
-- The baseline is used only when the reference is for the same model, the protocol matches and the prompt hashes match. Otherwise the check falls back to Anthropic `count_tokens` (exact) or the local estimate, and is labelled **UNCALIBRATED** in the report. Anthropic references get the same baseline. This covers relays that do not offer `count_tokens`.
+- The baseline is used only when the reference is for the same model, the protocol matches and the prompt hashes match. Otherwise the check falls back to Anthropic `count_tokens` or the local estimate. `count_tokens` is answered by the relay under test, so it is exact only if the relay does not inflate it too; the report names it as the relay's own count. The local estimate is labelled **UNCALIBRATED**. Anthropic references get the same baseline. This covers relays that do not offer `count_tokens`.
 
 Real check: the official API matched exactly (diff 0 on all three prompts). A local relay that prepends a 37-word hidden system prompt to every request was caught. See §5.4.
 
@@ -208,6 +208,19 @@ Power comes from probes where the models' favourite answers differ. Same-family 
 ### 5.4 Hidden prompt injection (real)
 
 A local proxy in front of the official API prepended a 37-word hidden system instruction to every gpt-6-luna request. relaycheck (`--probes identity,billing`) reported **INCONSISTENT: +37 hidden input tokens per request**. The same excess appeared on all three baseline prompts, which is how the check tells a constant per-request prompt from a different tokenizer. The tokenizer check showed 111 billed tokens against the official 74. The identity fingerprint also moved to p = 0.001 (warn): the hidden instructions change answer distributions too, mostly on `sport` and `metal`.
+
+### 5.5 More references: self-checks and swaps (real, 2026-10-31)
+
+Each run is the full identity check over the Responses API through a local metering proxy, 24 samples × 24 probes, scored against the reference in `refs/`. Raw output: `calib/val/*.txt`.
+
+| reference | official (honest) runs | gpt-6-luna served instead | other swap |
+|---|---|---|---|
+| gpt-6.1-sol (effort low) | 2 / 2 consistent (p 0.963, 0.907) | 2 / 2 caught (p 9.0·10⁻⁶, 1.2·10⁻⁵) | gpt-6.1-terra served: caught, p 1.6·10⁻¹⁴ |
+| gpt-6.1-terra (effort none) | 2 / 2 consistent (p 0.673, 0.514) | 2 / 2 caught (p 1.7·10⁻⁸, 1.0·10⁻⁶) | |
+| gpt-6-astra (effort low) | 1 / 1 consistent (p 0.428); 1 aborted | 1 / 1 caught (p 1.1·10⁻⁵) | gpt-6.1-sol served: **missed**, p 0.024 (see §7) |
+| gpt-5.3-codex (effort none) | 2 / 2 consistent (p 0.948, 0.896) | 2 / 2 caught (p 4.1·10⁻⁶, 8.0·10⁻⁶) | |
+
+The aborted run (`astra-honest-1.txt`) is reported as INCONCLUSIVE because the metering proxy crashed mid-run: 27 % of sample requests failed with ECONNREFUSED, so the tool refused to give a verdict (p = 0.247 on the samples that did arrive). It is excluded from the 7 / 7 count rather than counted as a pass.
 
 ## 6. Context probe
 

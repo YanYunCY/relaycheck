@@ -19,4 +19,10 @@ key 只从环境变量读，只发给你指定的那个地址，不经过任何�
 大部分时间给真模型、偶尔掺假的中转（80% 真模型时，24 样本只有 7.8% 概率判失败）；能认出固定探针、只把探针转给真模型的中转；同一模型的极近似变体。这些都写在 [METHOD.zh-CN.md](METHOD.zh-CN.md) 的局限里。
 
 **支持哪些模型和协议？**
-协议支持 Anthropic Messages、OpenAI Chat Completions、OpenAI Responses。身份检验需要该模型的参考指纹，目前内置 gpt-6-luna；其他模型可以用官方 key 自己生成（`relaycheck fingerprint`），欢迎 PR 贡献到 `refs/`。
+协议支持 Anthropic Messages、OpenAI Chat Completions、OpenAI Responses。身份检验需要该模型的参考指纹。目前内置 gpt-6-luna、gpt-6.1-sol、gpt-6.1-terra、gpt-6-astra、gpt-5.3-codex。还没有 Claude 的参考指纹；没有参考时身份结论为“存疑”，其他三组照常检测。其他模型可以用官方 key 自己生成（`relaycheck fingerprint`），欢迎 PR 贡献到 `refs/`。找到参考指纹时，relaycheck 会按它的采样方式来测：沿用它的 reasoning effort，`--api auto` 时优先试它用的协议。
+
+**中转改了 temperature 或加了自己的系统提示怎么办？**
+回答分布会变，即使底层模型是真的，relaycheck 也可能判为不一致。这确实和官方 API 不同（DFA 论文也报告了配置改动会导致拒绝），但不等于换了模型。隐藏系统提示通常还会在计费里表现为每请求固定多计的 token，可以借此区分。
+
+**为什么不用 logprobs？**
+多数中转不透传 logprobs，透传的也可能改写。对有限选项问题采样回答，只要协议能返回文本就能用。
