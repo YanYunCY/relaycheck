@@ -205,3 +205,27 @@ describe('end-to-end against the mock relay', () => {
     expect(Object.values(ref.probes[0].dist).reduce((a: number, b: any) => a + b, 0)).toBe(40);
   });
 });
+
+describe('reference defaults', () => {
+  it('without a reference, says identity will be inconclusive and lists bundled refs', async () => {
+    const r = await run([mocks.honest!.url, '--model', 'no-such-model', '--probes', 'identity', '--samples', '2', '--lang', 'en']);
+    expect(r.code).toBe(2);
+    expect(r.err).toMatch(/no reference fingerprint for "no-such-model"/);
+    expect(r.err).toMatch(/gpt-6-luna/);
+    expect(r.err).not.toMatch(/mock-honest/);
+  });
+
+  it('inherits reasoning effort from the reference unless overridden', async () => {
+    const ref = JSON.parse(readFileSync(REF_OPENAI, 'utf8'));
+    ref.sampling = { ...(ref.sampling ?? {}), api: 'responses', reasoningEffort: 'low' };
+    const p = join(dir, 'refs', 'effort-ref.json');
+    writeFileSync(p, JSON.stringify(ref));
+    const a = await run([mocks.honest!.url, '--model', ref.model, '--ref', p, '--probes', 'identity', '--samples', '4', '--lang', 'en']);
+    expect(a.err).toMatch(/using reasoning effort "low" from the reference/);
+    expect(a.out).not.toMatch(/mismatched sampling settings/);
+    expect(a.out).toMatch(/api: responses/); // auto-detect tries the reference's protocol first
+    const b = await run([mocks.honest!.url, '--model', ref.model, '--ref', p, '--probes', 'identity', '--samples', '4', '--lang', 'en', '--reasoning-effort', 'none']);
+    expect(b.err).not.toMatch(/from the reference/);
+    expect(b.out).toMatch(/mismatched sampling settings/);
+  });
+});

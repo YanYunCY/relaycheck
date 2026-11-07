@@ -16,6 +16,8 @@ export interface CheckOptions {
   baseUrl: string;
   model: string;
   api: ApiKind | 'auto';
+  /** with api auto: try this protocol first (the one the reference was sampled over) */
+  preferApi?: ApiKind;
   key: string;
   samples: number;
   probes: GroupId[];
@@ -30,7 +32,7 @@ export interface CheckOptions {
   log: (msg: string) => void;
 }
 
-export async function connect(opts: Pick<CheckOptions, 'baseUrl' | 'api' | 'key' | 'timeoutMs' | 'model' | 'log' | 'reasoningEffort' | 'retries'>): Promise<{ adapter: Adapter; baseUrl: string }> {
+export async function connect(opts: Pick<CheckOptions, 'baseUrl' | 'api' | 'preferApi' | 'key' | 'timeoutMs' | 'model' | 'log' | 'reasoningEffort' | 'retries'>): Promise<{ adapter: Adapter; baseUrl: string }> {
   let baseUrl: string;
   try {
     baseUrl = normalizeBaseUrl(opts.baseUrl);
@@ -41,7 +43,7 @@ export async function connect(opts: Pick<CheckOptions, 'baseUrl' | 'api' | 'key'
   let kind: ApiKind;
   if (opts.api === 'auto') {
     try {
-      kind = (await detectApi(ao, opts.model)).kind;
+      kind = (await detectApi(ao, opts.model, opts.preferApi)).kind;
     } catch (e) {
       throw new RuntimeError((e as Error).message);
     }

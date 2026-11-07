@@ -115,8 +115,9 @@ async function injection(ctx: ProbeContext): Promise<CheckResult> {
     // count_tokens is exact; the local ~4 chars/token estimate needs a lot of slack
     const exact = method === 'count_tokens';
     const [failAt, warnAt] = exact ? [Math.max(24, 0.05 * base), Math.max(12, 0.03 * base)] : [Math.max(200, 0.5 * base), Math.max(100, 0.25 * base)];
-    const evidence = { method, calibrated: exact, samples, excess, constantPerRequest: constant, thresholds: { fail: failAt, warn: warnAt } };
-    const how = exact ? l('count_tokens', 'count_tokens') : l('本地估算，未校准', 'local estimate, UNCALIBRATED');
+    const evidence = { method, calibrated: exact, baselineSource: exact ? 'relay_count_tokens' : 'local_estimate', samples, excess, constantPerRequest: constant, thresholds: { fail: failAt, warn: warnAt } };
+    // count_tokens is answered by the relay under test, so it only catches injection the relay does not also count there
+    const how = exact ? l('中转自己的 count_tokens，无参考基线', "the relay's own count_tokens, no reference baseline") : l('本地估算，未校准', 'local estimate, UNCALIBRATED');
     if (excess > failAt)
       return result(id, 'fail', title, l(`每请求多计约 ${excess} input token（基准：${how.zh}${constant ? '，固定量注入' : ''}）`, `≈${excess} extra input tokens billed per request (baseline: ${how.en}${constant ? ', constant per request' : ''})`), { ...evidence, injectedTokens: excess });
     if (excess > warnAt)

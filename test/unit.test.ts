@@ -46,6 +46,10 @@ describe('helpers', () => {
     expect(normalizeBaseUrl('https://a.com')).toBe('https://a.com/v1');
     expect(normalizeBaseUrl('https://a.com/v1/')).toBe('https://a.com/v1');
     expect(normalizeBaseUrl('https://a.com/api')).toBe('https://a.com/api/v1');
+    expect(normalizeBaseUrl('https://open.bigmodel.cn/api/paas/v4')).toBe('https://open.bigmodel.cn/api/paas/v4');
+    expect(normalizeBaseUrl('https://g.example/v1beta/openai/')).toBe('https://g.example/v1beta/openai');
+    expect(normalizeBaseUrl('https://a.com/v1?x=1#y')).toBe('https://a.com/v1');
+    expect(() => normalizeBaseUrl('ftp://a.com')).toThrow();
   });
   it('matches echoed model names', () => {
     expect(modelEchoMatches('claude-sonnet-4-5', 'claude-sonnet-4-5-20250929')).toBe(true);

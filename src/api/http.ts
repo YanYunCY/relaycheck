@@ -157,11 +157,15 @@ export function joinUrl(base: string, path: string): string {
   return base.replace(/\/+$/, '') + path;
 }
 
-/** Accept https://host, https://host/ or https://host/v1 — always return .../v1 */
+/**
+ * Accept https://host, https://host/ or https://host/v1 and return .../v1. A path that already
+ * ends in an API version (/v1, /v4, /v1beta, /v1beta/openai) is kept as is.
+ */
 export function normalizeBaseUrl(url: string): string {
   const u = new URL(url);
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') throw new Error(`unsupported scheme ${u.protocol}`);
   let p = u.pathname.replace(/\/+$/, '');
-  if (!/\/v1$/.test(p)) p += '/v1';
+  if (!/\/v\d+[a-z0-9]*(\/openai)?$/i.test(p)) p += '/v1';
   u.pathname = p;
   u.search = '';
   u.hash = '';

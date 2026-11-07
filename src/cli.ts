@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { API_KINDS, type ApiKind } from './api/types.js';
 import { createAdapter } from './api/detect.js';
-import { findRef, generateFingerprint, loadRef, measureBillingBaseline, saveRef, type RefFingerprint } from './fingerprint.js';
+import { bundledRefs, findRef, generateFingerprint, loadRef, measureBillingBaseline, saveRef, type RefFingerprint } from './fingerprint.js';
 import { IDENTITY_PROBES, refCompatibility } from './probes/identity.js';
 import { MOCK_KINDS, type MockKind, startMock } from './mock/server.js';
 import { Redactor, hostOf } from './redact.js';
@@ -19,6 +19,8 @@ export interface IO {
   stderr: (s: string) => void;
   env: NodeJS.ProcessEnv;
   isTTY: boolean;
+  /** stderr is a terminal: progress counters redraw one line instead of printing one line each */
+  errTTY?: boolean;
   cwd: string;
 }
 
@@ -27,6 +29,7 @@ export const defaultIO = (): IO => ({
   stderr: (s) => process.stderr.write(s),
   env: process.env,
   isTTY: !!process.stdout.isTTY,
+  errTTY: !!process.stderr.isTTY,
   cwd: process.cwd(),
 });
 
@@ -161,6 +164,7 @@ function writeOut(path: string, content: string, io: IO): string {
 export async function main(argv: string[], io: IO = defaultIO()): Promise<number> {
   const redactor = new Redactor();
   const err = (s: string) => io.stderr(redactor.redact(s));
+  let pending = false; // a progress line is drawn without a newline
   try {
     const { positionals, flags } = parseArgs(argv);
     if (flags.version) {
@@ -174,7 +178,18 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
     const cmd = positionals[0];
     const quiet = !!flags.quiet;
     const log = (m: string) => {
-      if (!quiet) err(`  · ${m}\n`);
+      if (quiet) return;
+      if (io.errTTY && /^[\w-]+ \d+\/\d+$/.test(m)) {
+        err(`\r\x1b[K  · ${m}`);
+        pending = true;
+        return;
+      }
+      err(`${pending ? '\r\x1b[K' : ''}  · ${m}\n`);
+      pending = false;
+    };
+    const endProgress = () => {
+      if (pending) err('\r\x1b[K');
+      pending = false;
     };
 
     if (cmd === 'mock') {
@@ -210,7 +225,7 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
     const api = apiOf(str(flags.api));
     const timeoutMs = int(flags.timeout, 'timeout', 120) * 1000;
     const concurrency = int(flags.concurrency, 'concurrency', 4);
-    const reasoningEffort = str(flags['reasoning-effort']);
+    let reasoningEffort = str(flags['reasoning-effort']);
     const retries = int(flags.retries, 'retries', 3, 0);
 
     if (isFingerprint) {
@@ -236,6 +251,7 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
       }
       const path = resolve(io.cwd, out);
       saveRef(path, ref);
+      endProgress();
       io.stdout(`wrote reference fingerprint ${path} (probe set v${ref.probeSetVersion}: ${ref.probes.length} probes × ${samples}; billing baselines: ${Object.keys(ref.billing).join(', ') || 'none'}; used ${usage.requests} requests, ${usage.inputTokens} input / ${usage.outputTokens} output tokens)\n`);
       return 0;
     }
@@ -255,13 +271,23 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
         throw new RuntimeError(`cannot use --ref ${refPath}: ${(e as Error).message}`);
       }
       if (ref.model !== model) log(`note: reference is for "${ref.model}", testing "${model}"`);
-    } else refPath = null;
+      // sample the way the reference was sampled unless told otherwise: a mismatched effort causes false alarms
+      if (flags['reasoning-effort'] === undefined && ref.sampling?.reasoningEffort) {
+        reasoningEffort = ref.sampling.reasoningEffort;
+        log(`using reasoning effort "${reasoningEffort}" from the reference (override with --reasoning-effort)`);
+      }
+    } else {
+      refPath = null;
+      if (probesOf(str(flags.probes)).includes('identity'))
+        log(`no reference fingerprint for "${model}": identity will be INCONCLUSIVE (bundled: ${bundledRefs().join(', ') || 'none'}; build one with \`relaycheck fingerprint\`)`);
+    }
     const probes = probesOf(str(flags.probes));
     if (probes.includes('context')) log(`context probe sends ≈34k input tokens${flags.deep ? ' + ≈100k (--deep)' : ''}`);
     const report = await runCheck({
       baseUrl,
       model,
       api,
+      preferApi: api === 'auto' && ref?.sampling?.api && (API_KINDS as string[]).includes(ref.sampling.api) ? (ref.sampling.api as ApiKind) : undefined,
       key,
       samples: int(flags.samples, 'samples', 24, 2),
       probes,
@@ -275,6 +301,7 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
       seed: int(flags.seed, 'seed', 1, 0),
       log,
     });
+    endProgress();
     const color = useColor(io.env, io.isTTY, !!flags['no-color']);
     io.stdout(redactor.redact(renderTerminal(redactor.redactDeep(report), lang, color)));
     const showHost = !!flags['show-host'];
@@ -286,7 +313,7 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
     return report.exitCode;
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
-    err(`relaycheck: error: ${msg}\n`);
+    err(`${pending ? '\r\x1b[K' : ''}relaycheck: error: ${msg}\n`);
     return 3;
   }
 }

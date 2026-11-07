@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Adapter, ApiKind } from './api/types.js';
@@ -155,4 +155,17 @@ export function findRef(model: string, cwd = process.cwd()): string | null {
     /* ignore */
   }
   return candidates.find((c) => existsSync(c)) ?? null;
+}
+
+/** Model names of the references shipped with the package (mock references excluded). */
+export function bundledRefs(): string[] {
+  try {
+    const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'refs');
+    return readdirSync(dir)
+      .filter((f) => f.endsWith('.json') && !f.startsWith('mock-'))
+      .map((f) => f.slice(0, -5))
+      .sort();
+  } catch {
+    return [];
+  }
 }

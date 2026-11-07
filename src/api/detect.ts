@@ -17,12 +17,14 @@ export function createAdapter(kind: ApiKind, o: AdapterOptions): Adapter {
 
 /**
  * Probe the endpoint with a tiny request per protocol, in order
- * anthropic → openai chat → responses, and pick the first that answers in-shape.
+ * anthropic → openai chat → responses (or `prefer` first), and pick the first that answers in-shape.
  */
-export async function detectApi(o: AdapterOptions, model: string): Promise<{ kind: ApiKind; tried: string[] }> {
+export async function detectApi(o: AdapterOptions, model: string, prefer?: ApiKind): Promise<{ kind: ApiKind; tried: string[] }> {
   const tried: string[] = [];
   const quick = { ...o, retries: 0 };
-  for (const kind of ['anthropic', 'openai', 'responses'] as ApiKind[]) {
+  const order: ApiKind[] = ['anthropic', 'openai', 'responses'];
+  if (prefer) order.sort((a, b) => (b === prefer ? 1 : 0) - (a === prefer ? 1 : 0));
+  for (const kind of order) {
     try {
       const r = await createAdapter(kind, quick).chat({
         model,
