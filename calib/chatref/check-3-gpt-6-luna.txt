@@ -1,0 +1,37 @@
+(node:7993) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  · using reasoning effort "none" from the reference (override with --reasoning-effort)
+  · using the openai reference /workspace/projects/6f683446-3a9a-4866-b478-51e28e3dbb80/relaycheck/refs/gpt-6-luna@openai.json
+  · identity 1/24
+  · identity 2/24
+  · identity 3/24
+  · identity 4/24
+  · identity 5/24
+  · identity 6/24
+  · identity 7/24
+  · identity 8/24
+  · identity 9/24
+  · identity 10/24
+  · identity 11/24
+  · identity 12/24
+  · identity 13/24
+  · identity 14/24
+  · identity 15/24
+  · identity 16/24
+  · identity 17/24
+  · identity 18/24
+  · identity 19/24
+  · identity 20/24
+  · identity 21/24
+  · identity 22/24
+  · identity 23/24
+  · identity 24/24
+CONSISTENT: behaves like gpt-6-luna (p=0.931)
+target: https://api.openai.com/v1  model: gpt-6-luna  api: openai  reference: gpt-6-luna  endpoint p-value: 0.931  took: 117.6s  used: 579 req, 18260 in / 2572 out tokens
+
+✔ IDENTITY  identity consistent
+   ✔ Statistical fingerprint: p=0.931: consistent with the gpt-6-luna reference (24 probes × 24 samples, mean JS=0.020)
+   ℹ Self-reported identity: answered "OpenAI o3" (self-reports are unreliable; not used for the verdict)
+   ℹ Knowledge cutoff: claims knowledge cutoff: November 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-luna count
+  · wrote /workspace/projects/6f683446-3a9a-4866-b478-51e28e3dbb80/relaycheck/calib/chatref/check-3-gpt-6-luna.json

@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { API_KINDS, type ApiKind } from './api/types.js';
 import { createAdapter } from './api/detect.js';
-import { bundledRefs, findRef, generateFingerprint, loadRef, measureBillingBaseline, saveRef, type RefFingerprint } from './fingerprint.js';
+import { bundledRefs, findProtocolRefs, findRef, generateFingerprint, loadRef, measureBillingBaseline, saveRef, type RefFingerprint } from './fingerprint.js';
 import { IDENTITY_PROBES, refCompatibility } from './probes/identity.js';
 import { MOCK_KINDS, type MockKind, startMock } from './mock/server.js';
 import { Redactor, hostOf } from './redact.js';
@@ -281,6 +281,26 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
       if (probesOf(str(flags.probes)).includes('identity'))
         log(`no reference fingerprint for "${model}": identity will be INCONCLUSIVE (bundled: ${bundledRefs().join(', ') || 'none'}; build one with \`relaycheck fingerprint\`)`);
     }
+    // protocol-specific references (refs/<model>@<api>.json), only when --ref was not given
+    const protocolRefs: NonNullable<Parameters<typeof runCheck>[0]['protocolRefs']> = {};
+    if (!str(flags.ref)) {
+      for (const [k, p] of Object.entries(findProtocolRefs(model, io.cwd)) as [ApiKind, string][]) {
+        try {
+          const r = loadRef(p);
+          refCompatibility(r, { api: 'unknown' });
+          protocolRefs[k] = { ref: r, path: p };
+        } catch (e) {
+          log(`ignoring ${p}: ${(e as Error).message}`);
+        }
+      }
+      if (!ref) {
+        const first = Object.values(protocolRefs)[0];
+        if (first) {
+          ref = first.ref;
+          refPath = first.path;
+        }
+      }
+    }
     const probes = probesOf(str(flags.probes));
     if (probes.includes('context')) log(`context probe sends ≈34k input tokens${flags.deep ? ' + ≈100k (--deep)' : ''}`);
     const report = await runCheck({
@@ -293,6 +313,7 @@ export async function main(argv: string[], io: IO = defaultIO()): Promise<number
       probes,
       ref,
       refPath,
+      protocolRefs,
       deep: !!flags.deep,
       concurrency,
       timeoutMs,

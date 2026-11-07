@@ -239,3 +239,18 @@ describe('protocol mismatch', () => {
     if (r.code === 2) expect(r.out).toMatch(/not evidence of a swap. Re-run with --api anthropic/);
   });
 });
+
+describe('protocol-specific references', () => {
+  it('picks refs/<model>@<api>.json for the detected protocol', async () => {
+    const m = 'proto-model';
+    const a = JSON.parse(readFileSync(REF, 'utf8'));
+    const o = JSON.parse(readFileSync(REF_OPENAI, 'utf8'));
+    writeFileSync(join(dir, 'refs', `${m}.json`), JSON.stringify({ ...a, model: m }));
+    writeFileSync(join(dir, 'refs', `${m}@openai.json`), JSON.stringify({ ...o, model: m }));
+    const r = await run([mocks.honest!.url, '--model', m, '--api', 'openai', '--probes', 'identity', '--samples', '6', '--lang', 'en']);
+    expect(r.err).toMatch(/using the openai reference .*proto-model@openai\.json/);
+    expect(r.out).not.toMatch(/reference was sampled over anthropic/);
+    const b = await run([mocks.honest!.url, '--model', m, '--api', 'anthropic', '--probes', 'identity', '--samples', '6', '--lang', 'en']);
+    expect(b.err).not.toMatch(/using the openai reference/);
+  });
+});

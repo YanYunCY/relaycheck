@@ -75,7 +75,7 @@ We ran relaycheck against the official OpenAI API. All numbers are from [docs/ME
 - **Hidden prompt injection.** A proxy that prepended a short hidden system prompt was caught exactly: *+37 input tokens per request*.
 - **Calibration.** In thousands of simulated null runs, the false-alarm rate is at or below the nominal level: 0.05 % at the fail threshold (p < 0.001) and 0.8 % at warn (p < 0.01).
 
-What it cannot see: a relay that serves the genuine model most of the time. At 24 samples, an 80 %-genuine mix is flagged as fail only 7.8 % of the time. It also cannot see vendor model updates, or near-identical variants. The bundled references were sampled over the Responses API; over Chat Completions the same official model drifts (p down to 10⁻⁴ in 5 runs), so a cross-protocol check only fails on a very strong signal and is otherwise inconclusive ([METHOD §5.6](docs/METHOD.md)). These are evidence, not proof. Read the [limitations](docs/METHOD.md#7-limitations-what-relaycheck-cannot-tell-you).
+What it cannot see: a relay that serves the genuine model most of the time. At 24 samples, an 80 %-genuine mix is flagged as fail only 7.8 % of the time. It also cannot see vendor model updates, or near-identical variants. The same official model drifts between the Responses API and Chat Completions (p down to 10⁻⁴ in 5 runs), so gpt-6-luna, gpt-6.1-terra and gpt-6.1-sol also ship Chat Completions references, picked automatically (5/5 official runs consistent, p 0.37–0.98). For the other models a cross-protocol check only fails on a very strong signal and is otherwise inconclusive ([METHOD §5.6](docs/METHOD.md)). These are evidence, not proof. Read the [limitations](docs/METHOD.md#7-limitations-what-relaycheck-cannot-tell-you).
 
 ## Build your own reference
 

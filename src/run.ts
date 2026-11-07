@@ -23,6 +23,8 @@ export interface CheckOptions {
   probes: GroupId[];
   ref: RefFingerprint | null;
   refPath: string | null;
+  /** references sampled over a specific protocol; the one matching the detected protocol replaces `ref` */
+  protocolRefs?: Partial<Record<ApiKind, { ref: RefFingerprint; path: string }>>;
   deep: boolean;
   concurrency: number;
   timeoutMs: number;
@@ -90,6 +92,11 @@ export function meter(adapter: Adapter, usage: UsageMeter = { requests: 0, input
 export async function runCheck(opts: CheckOptions): Promise<Report> {
   const started = Date.now();
   const conn = await connect(opts);
+  const alt = opts.protocolRefs?.[conn.adapter.kind];
+  if (alt && opts.ref?.sampling?.api !== conn.adapter.kind) {
+    opts = { ...opts, ref: alt.ref, refPath: alt.path };
+    opts.log(`using the ${conn.adapter.kind} reference ${alt.path}`);
+  }
   const { adapter, usage } = meter(conn.adapter);
   const baseUrl = conn.baseUrl;
   const ctx: ProbeContext = {

@@ -18,6 +18,7 @@ Format (relaycheck 0.2):
 | `gpt-6.1-sol.json` | **REAL**: official API, Responses, `--reasoning-effort low` (sol has no `none`), probe set v2, 100 × 24 (2,408 requests, 2026-10-31). φ from 4 fingerprint time blocks. |
 | `gpt-6.1-terra.json` | **REAL**: official API, Responses, `--reasoning-effort none`, probe set v2, 100 × 24 (2,410 requests, 2026-10-31). |
 | `gpt-6-astra.json` | **REAL**: official API, Responses, `--reasoning-effort low`, probe set v2, 100 × 24 (2,416 requests, 2026-10-31). Note: nearly indistinguishable from gpt-6.1-sol by sampling (see README limits). |
+| `gpt-6-luna@openai.json`, `gpt-6.1-terra@openai.json`, `gpt-6.1-sol@openai.json` | **REAL**: same models over **Chat Completions** (`--api openai`, same efforts as above), probe set v2, 100 × 24 (2,416 requests each, 2026-11-08). `relaycheck` picks `refs/<model>@<api>.json` when the detected protocol matches. Validation: 5/5 official chat runs consistent (p 0.37–0.98); offline the three are separated at p < 10⁻³⁷ (calib/chatref). |
 | `gpt-5.3-codex.json` | **REAL**: official API, Responses only (no Chat Completions for this model), `--reasoning-effort none`, probe set v2, 100 × 24 (2,400 requests, 2026-10-31). |
 | `mock-honest.json` | **SYNTHETIC**: 200 samples/probe from the local mock `honest` relay over the Anthropic protocol (`model: mock-sonnet`). |
 | `mock-honest-openai.json` | **SYNTHETIC**: same distribution, sampled over the OpenAI Chat protocol. |

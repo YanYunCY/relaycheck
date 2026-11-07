@@ -145,16 +145,37 @@ export function saveRef(path: string, ref: RefFingerprint): void {
 }
 
 /** Look for refs/<model>.json in cwd, then in the package's bundled refs/ directory. */
-export function findRef(model: string, cwd = process.cwd()): string | null {
-  const name = `${model.replace(/[^A-Za-z0-9._-]/g, '_')}.json`;
-  const candidates = [join(cwd, 'refs', name)];
+function refDirs(cwd: string): string[] {
+  const dirs = [join(cwd, 'refs')];
   try {
-    const here = dirname(fileURLToPath(import.meta.url));
-    candidates.push(join(here, '..', 'refs', name));
+    dirs.push(join(dirname(fileURLToPath(import.meta.url)), '..', 'refs'));
   } catch {
     /* ignore */
   }
-  return candidates.find((c) => existsSync(c)) ?? null;
+  return dirs;
+}
+
+const refBase = (model: string) => model.replace(/[^A-Za-z0-9._-]/g, '_');
+
+export function findRef(model: string, cwd = process.cwd()): string | null {
+  const name = `${refBase(model)}.json`;
+  return refDirs(cwd).map((d) => join(d, name)).find((c) => existsSync(c)) ?? null;
+}
+
+/**
+ * Protocol-specific references (`refs/<model>@<api>.json`), keyed by api, from the first
+ * refs directory that has any. The plain `refs/<model>.json` stays the default.
+ */
+export function findProtocolRefs(model: string, cwd = process.cwd()): Partial<Record<ApiKind, string>> {
+  for (const d of refDirs(cwd)) {
+    const out: Partial<Record<ApiKind, string>> = {};
+    for (const k of ['anthropic', 'openai', 'responses'] as ApiKind[]) {
+      const p = join(d, `${refBase(model)}@${k}.json`);
+      if (existsSync(p)) out[k] = p;
+    }
+    if (Object.keys(out).length) return out;
+  }
+  return {};
 }
 
 /** Model names of the references shipped with the package (mock references excluded). */
@@ -163,7 +184,8 @@ export function bundledRefs(): string[] {
     const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'refs');
     return readdirSync(dir)
       .filter((f) => f.endsWith('.json') && !f.startsWith('mock-'))
-      .map((f) => f.slice(0, -5))
+      .map((f) => f.slice(0, -5).replace(/@.*$/, ''))
+      .filter((m, i, a) => a.indexOf(m) === i)
       .sort();
   } catch {
     return [];
