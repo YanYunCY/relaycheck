@@ -239,6 +239,9 @@ export function refCompatibility(ref: RefFingerprint, opts: { api: string; reaso
   return { set, problems, notes };
 }
 
+/** fail threshold when the reference was sampled over another protocol (honest drift reached 1e-4) */
+export const MISMATCH_FAIL_P = 1e-6;
+
 export async function runIdentity(ctx: ProbeContext): Promise<GroupResult> {
   const results: CheckResult[] = [];
   const title = l('统计指纹', 'Statistical fingerprint');
@@ -274,10 +277,16 @@ export async function runIdentity(ctx: ProbeContext): Promise<GroupResult> {
       results.push(result('identity.fingerprint', 'warn', title, l(`全部采样失败：${lastError ?? ''}`, `all samples failed: ${lastError ?? ''}`), { errorRate: sc.errorRate }));
     } else {
       const ps = formatP(sc.pValue);
-      const status = sc.status;
+      // The same model sampled over another protocol is not the same null: measured on the official
+      // gpt-6-luna, Chat Completions vs a Responses reference gave p = 1e-4 .. 0.93 over 5 runs
+      // (calib/proto). Across a protocol mismatch only a much stronger signal counts as a swap.
+      const protoMismatch = !!ref.sampling?.api && ref.sampling.api !== ctx.adapter.kind && sc.status === 'fail' && sc.pValue >= MISMATCH_FAIL_P;
+      const status = protoMismatch ? 'warn' : sc.status;
       const errPct = (sc.errorRate * 100).toFixed(0);
       const detail =
-        status === 'fail'
+        protoMismatch
+          ? l(`p=${ps}，与 ${ref.model} 参考指纹不同，但参考是用 ${ref.sampling!.api} 协议采的、本次用 ${ctx.adapter.kind}：同一模型换协议也会偏离，不能据此判定换模型。请用 --api ${ref.sampling!.api} 复测，或用 ${ctx.adapter.kind} 协议生成参考`, `p=${ps}: differs from the ${ref.model} reference, but the reference was sampled over ${ref.sampling!.api} and this run used ${ctx.adapter.kind}; the same model drifts across protocols, so this is not evidence of a swap. Re-run with --api ${ref.sampling!.api}, or build a reference over ${ctx.adapter.kind}`)
+          : status === 'fail'
           ? l(`p=${ps}，回答分布与 ${ref.model} 参考指纹显著不同（平均 JS=${sc.meanJs.toFixed(3)}；差异最大：${sc.worst.join(', ')}）`, `p=${ps}: answer distributions differ significantly from the ${ref.model} reference (mean JS=${sc.meanJs.toFixed(3)}; most different: ${sc.worst.join(', ')})`)
           : status === 'warn'
             ? sc.pValue >= WARN_P

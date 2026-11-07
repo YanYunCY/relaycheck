@@ -1,0 +1,9 @@
+INCONSISTENT: p=0.0001, does not behave like gpt-6-luna
+target: https://api.openai.com/v1  model: gpt-6-luna  api: openai  reference: gpt-6-luna  endpoint p-value: 0.0001  took: 126.1s  used: 579 req, 18260 in / 2572 out tokens
+
+✖ IDENTITY  likely model swap
+   ✖ Statistical fingerprint: p=0.0001: answer distributions differ significantly from the gpt-6-luna reference (mean JS=0.048; most different: animal, shape, letter10)
+   ℹ Reference compatibility: reference was sampled over responses, this run uses openai; protocol defaults may differ
+   ✔ Self-reported identity: answered "GPT-5.2 Thinking", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: November 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-luna count

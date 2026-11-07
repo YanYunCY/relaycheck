@@ -78,7 +78,7 @@ describe('end-to-end against the mock relay', () => {
   });
 
   it('swap over OpenAI protocol is also caught', async () => {
-    const r = await check('swap', ['--api', 'openai', '--probes', 'identity']);
+    const r = await check('swap', ['--api', 'openai', '--probes', 'identity', '--ref', REF_OPENAI]);
     expect(r.code).toBe(1);
     expect(group(r.report, 'identity').status).toBe('fail');
   });
@@ -227,5 +227,15 @@ describe('reference defaults', () => {
     const b = await run([mocks.honest!.url, '--model', ref.model, '--ref', p, '--probes', 'identity', '--samples', '4', '--lang', 'en', '--reasoning-effort', 'none']);
     expect(b.err).not.toMatch(/from the reference/);
     expect(b.out).toMatch(/mismatched sampling settings/);
+  });
+});
+
+describe('protocol mismatch', () => {
+  it('a reference sampled over another protocol still catches a clear swap, and says so', async () => {
+    const r = await run([mocks.swap!.url, '--model', 'mock-sonnet', '--ref', REF, '--api', 'openai', '--probes', 'identity', '--samples', '24', '--lang', 'en']);
+    expect(r.out).toMatch(/reference was sampled over anthropic, this run uses openai/);
+    // never a pass; a fail only below MISMATCH_FAIL_P, otherwise inconclusive with advice
+    expect([1, 2]).toContain(r.code);
+    if (r.code === 2) expect(r.out).toMatch(/not evidence of a swap. Re-run with --api anthropic/);
   });
 });

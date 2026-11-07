@@ -1,0 +1,615 @@
+{
+  "tool": "relaycheck",
+  "version": "0.2.2",
+  "target": {
+    "baseUrl": "https://api.openai.com/v1",
+    "host": "api.openai.com",
+    "model": "gpt-6-luna",
+    "api": "openai"
+  },
+  "startedAt": "2026-11-07T05:01:29.799Z",
+  "durationMs": 120776,
+  "verdict": "consistent",
+  "exitCode": 0,
+  "headline": {
+    "zh": "一致：行为与 gpt-6-luna 参考指纹一致（p=0.013）",
+    "en": "CONSISTENT: behaves like gpt-6-luna (p=0.013)"
+  },
+  "pValue": 0.013278831402801616,
+  "calibrated": true,
+  "injectedTokens": null,
+  "reference": {
+    "path": "/workspace/projects/6f683446-3a9a-4866-b478-51e28e3dbb80/relaycheck/refs/gpt-6-luna.json",
+    "model": "gpt-6-luna",
+    "samples": 100,
+    "synthetic": false,
+    "probeSetVersion": 2
+  },
+  "usage": {
+    "requests": 579,
+    "inputTokens": 18260,
+    "outputTokens": 2586
+  },
+  "groups": [
+    {
+      "id": "identity",
+      "status": "pass",
+      "summary": {
+        "zh": "身份一致",
+        "en": "identity consistent"
+      },
+      "results": [
+        {
+          "id": "identity.fingerprint",
+          "status": "pass",
+          "title": {
+            "zh": "统计指纹",
+            "en": "Statistical fingerprint"
+          },
+          "detail": {
+            "zh": "p=0.013，与 gpt-6-luna 参考指纹一致（24 个探针 × 24 次，平均 JS=0.030）",
+            "en": "p=0.013: consistent with the gpt-6-luna reference (24 probes × 24 samples, mean JS=0.030)"
+          },
+          "evidence": {
+            "calibrated": true,
+            "pValue": 0.013278831402801616,
+            "combination": "cauchy",
+            "thresholds": {
+              "fail": 0.001,
+              "warn": 0.01
+            },
+            "probeSetVersion": 2,
+            "dispersion": 1.098,
+            "samplesPerProbe": 24,
+            "informativeProbes": 23,
+            "errorRate": 0,
+            "meanJs": 0.02969166666666667,
+            "unclassifiedExamples": {},
+            "probes": [
+              {
+                "id": "letter10",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.004766444232602479,
+                "method": "monte-carlo",
+                "reps": 8392,
+                "chi2": 10.485,
+                "df": 2,
+                "js": 0.1502,
+                "observed": {
+                  "g": 21,
+                  "a": 3
+                },
+                "reference": {
+                  "a": 36,
+                  "g": 50,
+                  "c": 14
+                }
+              },
+              {
+                "id": "zh_animal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.851063829787234,
+                "method": "monte-carlo",
+                "reps": 47,
+                "chi2": 3.012,
+                "df": 5,
+                "js": 0.0359,
+                "observed": {
+                  "熊": 4,
+                  "狗": 5,
+                  "兔": 12,
+                  "鹰": 2,
+                  "猫": 1
+                },
+                "reference": {
+                  "兔": 55,
+                  "鹰": 11,
+                  "猫": 10,
+                  "狗": 12,
+                  "马": 2,
+                  "熊": 10
+                }
+              },
+              {
+                "id": "continent",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.40816326530612246,
+                "method": "monte-carlo",
+                "reps": 98,
+                "chi2": 1.751,
+                "df": 2,
+                "js": 0.0184,
+                "observed": {
+                  "africa": 7,
+                  "asia": 8,
+                  "south america": 9
+                },
+                "reference": {
+                  "asia": 49,
+                  "africa": 23,
+                  "south america": 28
+                }
+              },
+              {
+                "id": "catname",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.7407407407407407,
+                "method": "monte-carlo",
+                "reps": 54,
+                "chi2": 0.361,
+                "df": 1,
+                "js": 0.0042,
+                "observed": {
+                  "milo": 22,
+                  "luna": 2
+                },
+                "reference": {
+                  "milo": 87,
+                  "luna": 13
+                }
+              },
+              {
+                "id": "month",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0851063829787234,
+                "method": "monte-carlo",
+                "reps": 470,
+                "chi2": 4.276,
+                "df": 2,
+                "js": 0.0718,
+                "observed": {
+                  "september": 20,
+                  "october": 4
+                },
+                "reference": {
+                  "september": 62,
+                  "october": 28,
+                  "november": 10
+                }
+              },
+              {
+                "id": "metal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.6153846153846154,
+                "method": "monte-carlo",
+                "reps": 65,
+                "chi2": 1.408,
+                "df": 2,
+                "js": 0.031,
+                "observed": {
+                  "gold": 13,
+                  "copper": 11
+                },
+                "reference": {
+                  "gold": 49,
+                  "copper": 45,
+                  "platinum": 6
+                }
+              },
+              {
+                "id": "coin3",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.04962779156327544,
+                "method": "monte-carlo",
+                "reps": 806,
+                "chi2": 5.697,
+                "df": 2,
+                "js": 0.1106,
+                "observed": {
+                  "tht": 23,
+                  "hth": 1
+                },
+                "reference": {
+                  "tht": 73,
+                  "htt": 19,
+                  "hth": 8
+                }
+              },
+              {
+                "id": "flower",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.9090909090909091,
+                "method": "monte-carlo",
+                "reps": 44,
+                "chi2": 0.166,
+                "df": 2,
+                "js": 0.0016,
+                "observed": {
+                  "sunflower": 18,
+                  "orchid": 2,
+                  "tulip": 4
+                },
+                "reference": {
+                  "tulip": 14,
+                  "sunflower": 79,
+                  "orchid": 7
+                }
+              },
+              {
+                "id": "sport",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.23809523809523808,
+                "method": "monte-carlo",
+                "reps": 168,
+                "chi2": 1.549,
+                "df": 1,
+                "js": 0.0149,
+                "observed": {
+                  "soccer": 14,
+                  "tennis": 10
+                },
+                "reference": {
+                  "soccer": 72,
+                  "tennis": 28
+                }
+              },
+              {
+                "id": "daytime",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.22598870056497175,
+                "method": "monte-carlo",
+                "reps": 177,
+                "chi2": 2.682,
+                "df": 2,
+                "js": 0.035,
+                "observed": {
+                  "morning": 19,
+                  "afternoon": 5
+                },
+                "reference": {
+                  "morning": 86,
+                  "evening": 4,
+                  "afternoon": 10
+                }
+              },
+              {
+                "id": "one_to_20",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.19900497512437812,
+                "method": "monte-carlo",
+                "reps": 201,
+                "chi2": 1.645,
+                "df": 1,
+                "js": 0.0155,
+                "observed": {
+                  "13": 15,
+                  "14": 9
+                },
+                "reference": {
+                  "13": 76,
+                  "14": 24
+                }
+              },
+              {
+                "id": "weekday",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1,
+                "method": "monte-carlo",
+                "reps": 40,
+                "chi2": 0.009,
+                "df": 1,
+                "js": 0.0001,
+                "observed": {
+                  "thursday": 18,
+                  "wednesday": 6
+                },
+                "reference": {
+                  "thursday": 74,
+                  "wednesday": 26
+                }
+              },
+              {
+                "id": "animal_rev",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1,
+                "method": "monte-carlo",
+                "reps": 40,
+                "chi2": 0.111,
+                "df": 1,
+                "js": 0.0013,
+                "observed": {
+                  "fox": 23,
+                  "owl": 1
+                },
+                "reference": {
+                  "owl": 6,
+                  "fox": 94
+                }
+              },
+              {
+                "id": "tree",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1,
+                "method": "monte-carlo",
+                "reps": 40,
+                "chi2": 0.027,
+                "df": 1,
+                "js": 0.0003,
+                "observed": {
+                  "maple": 23,
+                  "oak": 1
+                },
+                "reference": {
+                  "maple": 95,
+                  "oak": 5
+                }
+              },
+              {
+                "id": "rps",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.9523809523809523,
+                "method": "monte-carlo",
+                "reps": 42,
+                "chi2": 0.55,
+                "df": 2,
+                "js": 0.0051,
+                "observed": {
+                  "scissors": 18,
+                  "paper": 2,
+                  "rock": 4
+                },
+                "reference": {
+                  "scissors": 81,
+                  "paper": 8,
+                  "rock": 11
+                }
+              },
+              {
+                "id": "shape",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.06430868167202572,
+                "method": "monte-carlo",
+                "reps": 622,
+                "chi2": 5.516,
+                "df": 2,
+                "js": 0.0363,
+                "observed": {
+                  "circle": 5,
+                  "hexagon": 18,
+                  "triangle": 1
+                },
+                "reference": {
+                  "hexagon": 89,
+                  "circle": 11
+                }
+              },
+              {
+                "id": "planet",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.25806451612903225,
+                "method": "monte-carlo",
+                "reps": 155,
+                "chi2": 3.896,
+                "df": 2,
+                "js": 0.0219,
+                "observed": {
+                  "mars": 21,
+                  "earth": 2,
+                  "saturn": 1
+                },
+                "reference": {
+                  "mars": 93,
+                  "earth": 7
+                }
+              },
+              {
+                "id": "dessert",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1,
+                "method": "monte-carlo",
+                "reps": 40,
+                "chi2": 0.001,
+                "df": 1,
+                "js": 0,
+                "observed": {
+                  "brownie": 23,
+                  "cookie": "[REDACTED]"
+                },
+                "reference": {
+                  "brownie": 96,
+                  "cookie": "[REDACTED]"
+                }
+              },
+              {
+                "id": "suit",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.6153846153846154,
+                "method": "monte-carlo",
+                "reps": 65,
+                "chi2": 0.379,
+                "df": 1,
+                "js": 0.0042,
+                "observed": {
+                  "hearts": 21,
+                  "spades": 3
+                },
+                "reference": {
+                  "hearts": 82,
+                  "spades": 18
+                }
+              },
+              {
+                "id": "digit_not7",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.7017543859649122,
+                "method": "monte-carlo",
+                "reps": 57,
+                "chi2": 0.342,
+                "df": 1,
+                "js": 0.0032,
+                "observed": {
+                  "3": 4,
+                  "4": 20
+                },
+                "reference": {
+                  "3": 12,
+                  "4": 88
+                }
+              },
+              {
+                "id": "season",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.6060606060606061,
+                "method": "monte-carlo",
+                "reps": 66,
+                "chi2": 0.672,
+                "df": 1,
+                "js": 0.0152,
+                "observed": {
+                  "autumn": 24
+                },
+                "reference": {
+                  "autumn": 97,
+                  "spring": 3
+                }
+              },
+              {
+                "id": "animal",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.0005249737513124343,
+                "method": "monte-carlo",
+                "reps": 20000,
+                "chi2": 12.244,
+                "df": 1,
+                "js": 0.1172,
+                "observed": {
+                  "owl": 8,
+                  "fox": 16
+                },
+                "reference": {
+                  "owl": 73,
+                  "fox": 27
+                }
+              },
+              {
+                "id": "zh_color",
+                "n": 24,
+                "errors": 0,
+                "pValue": 0.43010752688172044,
+                "method": "monte-carlo",
+                "reps": 93,
+                "chi2": 1.588,
+                "df": 2,
+                "js": 0.0187,
+                "observed": {
+                  "蓝": 11,
+                  "绿": 13
+                },
+                "reference": {
+                  "绿": 40,
+                  "蓝": 59,
+                  "紫": 1
+                }
+              },
+              {
+                "id": "card_rank",
+                "n": 24,
+                "errors": 0,
+                "pValue": 1,
+                "method": "monte-carlo",
+                "reps": 0,
+                "chi2": 0,
+                "df": 0,
+                "js": 0,
+                "observed": {
+                  "7": 24
+                },
+                "reference": {
+                  "7": 100
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "identity.ref_compat",
+          "status": "info",
+          "title": {
+            "zh": "参考指纹兼容性",
+            "en": "Reference compatibility"
+          },
+          "detail": {
+            "zh": "参考指纹用 responses 协议采样，本次用 openai：不同协议的默认行为可能不同",
+            "en": "reference was sampled over responses, this run uses openai; protocol defaults may differ"
+          }
+        },
+        {
+          "id": "identity.self_report",
+          "status": "pass",
+          "title": {
+            "zh": "自报身份",
+            "en": "Self-reported identity"
+          },
+          "detail": {
+            "zh": "自称「GPT-5.2」，与请求模型同一家族（自报不可靠，仅供参考）",
+            "en": "answered \"GPT-5.2\", same family as the requested model (self-reports are unreliable)"
+          },
+          "evidence": {
+            "answer": "GPT-5.2"
+          }
+        },
+        {
+          "id": "identity.cutoff",
+          "status": "info",
+          "title": {
+            "zh": "知识截止",
+            "en": "Knowledge cutoff"
+          },
+          "detail": {
+            "zh": "自称知识截止：November 2024",
+            "en": "claims knowledge cutoff: November 2024"
+          },
+          "evidence": {
+            "answer": "November 2024"
+          }
+        },
+        {
+          "id": "identity.tokenizer",
+          "status": "info",
+          "title": {
+            "zh": "分词器长度特征",
+            "en": "Tokenizer length signature"
+          },
+          "detail": {
+            "zh": "固定文本计 74 input token，与 gpt-6-luna 官方计数一致",
+            "en": "fixed text billed as 74 input tokens, same as the official gpt-6-luna count"
+          },
+          "evidence": {
+            "inputTokens": 74,
+            "referenceInputTokens": 74,
+            "chars": 146,
+            "charsPerToken": 1.97,
+            "localEstimate": 47,
+            "matchesReference": true
+          }
+        }
+      ],
+      "meta": {
+        "pValue": 0.013278831402801616,
+        "calibrated": true
+      }
+    }
+  ]
+}

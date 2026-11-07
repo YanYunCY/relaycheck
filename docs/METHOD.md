@@ -222,6 +222,10 @@ Each run is the full identity check over the Responses API through a local meter
 
 The aborted run (`astra-honest-1.txt`) is reported as INCONCLUSIVE because the metering proxy crashed mid-run: 27 % of sample requests failed with ECONNREFUSED, so the tool refused to give a verdict (p = 0.247 on the samples that did arrive). It is excluded from the 7 / 7 count rather than counted as a pass.
 
+### 5.6 Protocol mismatch (real, 2026-11-07)
+
+The bundled references were sampled over the Responses API, but many relays only offer Chat Completions. Five identity checks of the **official** gpt-6-luna over Chat Completions, scored against the Responses reference, gave p = 0.931, 0.026, 0.013, 0.005 and 1.0·10⁻⁴ (`calib/proto/`). The same model drifts measurably across protocols, so a cross-protocol comparison is not the null the test was calibrated for. Since 0.2.3 relaycheck therefore (a) tries the reference's protocol first with `--api auto`, and (b) when the protocols still differ, reports a fail only below p = 10⁻⁶ and otherwise returns *inconclusive* with the advice to re-run over the reference's protocol or build a reference over the relay's. Cross-family swaps measured so far sit at 10⁻¹⁴ to 10⁻¹⁸ and still fail; a close sibling may only reach inconclusive. Chat Completions references are the proper fix.
+
 ## 6. Context probe
 
 Each document holds three passphrases at 10 %, 50 % and 90 % depth. Head-only, tail-only and middle-out truncation then all lose at least one. The documents are a 2k control, 32k and, with `--deep`, 100k (approximate sizes, ~4 chars/token). Matching tolerates case, markdown and Unicode dashes. False positives are avoided in two ways:

@@ -1,0 +1,9 @@
+INCONCLUSIVE: identity (identity uncertain)
+target: https://api.openai.com/v1  model: gpt-6-luna  api: openai  reference: gpt-6-luna  endpoint p-value: 0.005  took: 115.4s  used: 579 req, 18260 in / 2586 out tokens
+
+▲ IDENTITY  identity uncertain
+   ▲ Statistical fingerprint: p=0.005: mild deviation from the reference (error rate 0%); re-run with more --samples
+   ℹ Reference compatibility: reference was sampled over responses, this run uses openai; protocol defaults may differ
+   ✔ Self-reported identity: answered "GPT-5.2", same family as the requested model (self-reports are unreliable)
+   ℹ Knowledge cutoff: claims knowledge cutoff: June 2024
+   ℹ Tokenizer length signature: fixed text billed as 74 input tokens, same as the official gpt-6-luna count

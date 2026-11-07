@@ -24,7 +24,7 @@ Format (relaycheck 0.2):
 
 The mock files describe no real model. They exist so the demo and tests run with no keys. Regenerate them with `npm run refs`.
 
-To make a real reference, use an endpoint you trust (e.g. the official API) and the same `--api` / `--reasoning-effort` you will check with:
+To make a real reference, use an endpoint you trust (e.g. the official API) and the same `--api` / `--reasoning-effort` you will check with (a check reuses the reference's reasoning effort unless you pass `--reasoning-effort`, and with `--api auto` tries its protocol first):
 
 ```
 RELAY_KEY=... npx relaycheck fingerprint https://api.openai.com --model <model> --api responses --samples 100 --out refs/<model>.json
